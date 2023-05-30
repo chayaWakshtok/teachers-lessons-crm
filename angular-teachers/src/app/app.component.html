@@ -1,0 +1,66 @@
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user&&user.id">
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+    <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav> -->
+<ng-container *ngIf="user&&user.id">
+  <!-- <div class="p-4">
+  <div class="container">
+    <h1>Hi {{user?.firstName}}!</h1>
+
+    <app-home-student *ngIf="user?.roleId==1"></app-home-student>
+    <app-home-teacher *ngIf="user?.roleId==2"></app-home-teacher>
+  </div>
+</div> -->
+
+  <!--sidebar-->
+  <c-sidebar #sidebar="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar" visible>
+    <c-sidebar-brand [brandFull]="{
+      src: 'assets/img/brand/coreui-angular.svg',
+      width: 200,
+      height: 46,
+      alt: 'CoreUI Logo'
+    }" [brandNarrow]="{
+      src: 'assets/img/brand/coreui-signet-white.svg',
+      width: 46,
+      height: 46,
+      alt: 'CoreUI Logo'
+    }" routerLink="./">
+    </c-sidebar-brand>
+    <!-- <perfect-scrollbar [config]="perfectScrollbarConfig">-->
+    <c-sidebar-nav [navItems]="navItems" dropdownMode="close">
+    </c-sidebar-nav>
+    <!-- </perfect-scrollbar>  -->
+    <c-sidebar-toggler *ngIf="!sidebar.narrow" toggle="unfoldable" cSidebarToggle="sidebar"></c-sidebar-toggler>
+  </c-sidebar>
+
+  <!--main-->
+  <div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
+    <!--app-header-->
+    <!-- <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky"
+    sidebarId="sidebar"></app-default-header> -->
+    <!--app-body-->
+    <div class="body flex-grow-1 px-3">
+      <c-container breakpoint="xl" class="h-auto">
+        <p-toast></p-toast>
+        <div class="wrapper">
+          <router-outlet></router-outlet>
+        </div>
+      </c-container>
+    </div>
+    <!--app footer-->
+    <!-- <app-default-footer></app-default-footer> -->
+  </div>
+
+</ng-container>
+
+
+
+<!-- main app container -->
+<div class="app-container" [ngClass]="{ 'bg-light': user }" *ngIf="!user||!user.id">
+  <p-toast></p-toast>
+  <router-outlet></router-outlet>
+</div>

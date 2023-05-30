@@ -1,0 +1,24 @@
+::ng-deep {
+  .p-steps .p-steps-item .p-menuitem-link:not(.p-disabled):focus {
+    box-shadow: none !important;
+  }
+  .p-steps .p-steps-item .p-menuitem-link {
+    background-color: transparent !important;
+  }
+}
+
+.login100-more {
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  margin: auto;
+  width: 60%;
+  top: 5vh;
+  padding: 2vh;
+}

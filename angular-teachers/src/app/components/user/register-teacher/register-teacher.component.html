@@ -1,0 +1,45 @@
+<div class="login100-more" style="background-image: url('assets/bg-01.jpg');">
+  <div class="card">
+    <p-steps [model]="tabs" [(activeIndex)]="shooseIndex" [readonly]="false">
+    </p-steps><br />
+    <div *ngIf="shooseIndex==0">
+      <app-register [roleId]="2" (nextStep)="nextStep($event)"></app-register>
+    </div>
+    <div *ngIf="shooseIndex==1">
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row">
+          <div class="col-4" style="margin: auto;">
+            <div class="form-group mb-3">
+              <label for="firstName">Experience</label>
+              <input type="number" formControlName="experience" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['experience'].errors }" />
+              <div *ngIf="submitted && f['experience'].errors" class="invalid-feedback">
+                <div *ngIf="f['experience'].errors['required']">Experience is required</div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="firstName">Place</label>
+              <input type="text" formControlName="place" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['place'].errors }" />
+              <div *ngIf="submitted && f['place'].errors" class="invalid-feedback">
+                <div *ngIf="f['place'].errors['required']">Place is required</div>
+              </div>
+            </div>
+            <div class="form-check mb-3">
+              <input type="checkbox" formControlName="sameGender" class="form-check-input"
+                [ngClass]="{ 'is-invalid': submitted && f['sameGender'].errors }" />
+              <label for="firstName" class="form-check-label">Learn only same Gender</label>
+            </div>
+          </div>
+          <div class="form-group div-btn">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- <a routerLink="../login" class="btn btn-link">Cancel</a> -->
+  </div>
+</div>

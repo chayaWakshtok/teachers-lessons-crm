@@ -1,0 +1,96 @@
+<!-- <div class="card">
+  <h4 class="card-header">Login</h4>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+          <div *ngIf="f['username']['errors']['required']">Username is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+          <div *ngIf="f['password'].errors['required']">Password is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Login
+        </button>
+        <a routerLink="../register" class="btn btn-link">Register</a>
+      </div>
+    </form>
+  </div>
+</div> -->
+
+
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <span class="login100-form-title p-b-43">
+          Login
+        </span>
+
+        <div class="wrap-input100 validate-input">
+          <input class="input100" type="text" formControlName="username" name="Username" placeholder="Username"
+            [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
+        </div>
+        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+          <div *ngIf="f['username']['errors']['required']">Username is required</div>
+        </div>
+
+
+        <div class="wrap-input100 validate-input" data-validate="Password is required">
+          <input class="input100" type="password" formControlName="password" name="password" placeholder="Password"
+            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+        </div>
+        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+          <div *ngIf="f['password'].errors['required']">Password is required</div>
+        </div>
+
+        <!-- <div class="flex-sb-m w-full p-t-3 p-b-32">
+          <div class="contact100-form-checkbox">
+            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+            <label class="label-checkbox100" for="ckb1">
+              Remember me
+            </label>
+          </div>
+
+          <div>
+            <a href="#" class="txt1">
+              Forgot Password?
+            </a>
+          </div>
+        </div> -->
+
+
+        <div class="container-login100-form-btn mt-3">
+          <button class="login100-form-btn" [disabled]="loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Login
+          </button>
+        </div>
+
+        <div class="text-center mt-2">
+          <a class="link-secondary" routerLink="../register-teacher">
+            sign up Teacher
+          </a>
+          <a class="link-secondary" routerLink="../register-student" style="margin-left: 20%;">
+            sign up Student
+          </a>
+        </div>
+
+      </form>
+
+      <div class="login100-more" style="background-image: url('assets/bg-01.jpg');">
+      </div>
+    </div>
+  </div>
+</div>
