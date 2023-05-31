@@ -55,6 +55,15 @@ import { HolidayFormComponent } from './components/teachers/holiday-list/holiday
 import { MessageListComponent } from './components/teachers/message-list/message-list.component';
 import { MessageFormComponent } from './components/teachers/message-list/message-form/message-form.component';
 import { CalanderComponent } from './components/teachers/calander/calander.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+// import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+// import * as moment from 'moment';
+
+// export function momentAdapterFactory() {
+//   return adapterFactory(moment);
+// };
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 
 
 @NgModule({
@@ -116,6 +125,7 @@ import { CalanderComponent } from './components/teachers/calander/calander.compo
     ListGroupModule,
     CardModule,
     IconModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [
     MessageService,

@@ -28,8 +28,8 @@ db.sequelize.sync();
 //force: true will drop the table if it already exists
 // db.sequelize.sync({force: true}).then(() => {
 //   console.log('Drop and Resync Database with { force: true }');
- // initial();
-//});
+//  initial();
+// });
 
 // simple route
 app.get("/", (req, res) => {
@@ -66,4 +66,16 @@ function initial() {
     id: 3,
     name: "admin"
   });
+
+  db.city.create({
+    name:"Bnei Brak"
+  })
+
+  db.city.create({
+    name:"Jerusalem"
+  })
+
+  db.city.create({
+    name:"Tell Aviv"
+  })
 }
