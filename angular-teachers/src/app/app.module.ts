@@ -47,6 +47,14 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { LessonListComponent } from './components/teachers/lesson-list/lesson-list.component';
 import { LessonFormComponent } from './components/teachers/lesson-list/lesson-form/lesson-form.component';
 import { Select2Module } from 'ng-select2-component';
+import { SeriesListComponent } from './components/teachers/series-list/series-list.component';
+import { SerirsFormComponent } from './components/teachers/series-list/serirs-form/serirs-form.component';
+import { UpdateDetailsComponent } from './components/teachers/update-details/update-details.component';
+import { HolidayListComponent } from './components/teachers/holiday-list/holiday-list.component';
+import { HolidayFormComponent } from './components/teachers/holiday-list/holiday-form/holiday-form.component';
+import { MessageListComponent } from './components/teachers/message-list/message-list.component';
+import { MessageFormComponent } from './components/teachers/message-list/message-form/message-form.component';
+import { CalanderComponent } from './components/teachers/calander/calander.component';
 
 
 @NgModule({
@@ -58,6 +66,14 @@ import { Select2Module } from 'ng-select2-component';
     HomeStudentComponent,
     LessonListComponent,
     LessonFormComponent,
+    SeriesListComponent,
+    SerirsFormComponent,
+    UpdateDetailsComponent,
+    HolidayListComponent,
+    HolidayFormComponent,
+    MessageListComponent,
+    MessageFormComponent,
+    CalanderComponent,
   ],
   imports: [
     BrowserModule,
