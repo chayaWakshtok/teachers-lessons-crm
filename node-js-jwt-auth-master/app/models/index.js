@@ -79,6 +79,12 @@ db.lesson.belongsTo(db.specialty, {
   as: "specialty",
 });
 
+db.subject.hasMany(db.lesson, { as: "lessons" });
+db.lesson.belongsTo(db.subject, {
+  foreignKey: "subjectId",
+  as: "subject",
+});
+
 db.series.hasMany(db.lesson, { as: "lessons" });
 db.lesson.belongsTo(db.series, {
   foreignKey: "seriesId",
@@ -126,20 +132,7 @@ db.teacher.hasMany(db.series, { as: "series" });
 db.series.belongsTo(db.teacher, {
   foreignKey: "teacherId",
   as: "teacher",
-});
-
-
-db.specialty.belongsToMany(db.teacher, {
-  through: "specialtyTeacher",
-  as: "teachers",
-  foreignKey: "specialtyId",
-});
-
-db.teacher.belongsToMany(db.specialty, {
-  through: "specialtyTeacher",
-  as: "specialties",
-  foreignKey: "teacherId",
-});
+});0
 
 db.user.hasOne(db.teacher);
 db.teacher.belongsTo(db.user);

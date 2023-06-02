@@ -7,5 +7,4 @@ export class Teacher {
   isActive: boolean = true;
   sameGender: boolean = false;
   userId: number | undefined;
-  specialties: Specialty[] = [];
 }

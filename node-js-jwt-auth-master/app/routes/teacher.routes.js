@@ -11,7 +11,6 @@ module.exports = function(app) {
   });
 
   app.post("/api/teacher/create", controller.create);
-  app.get("/api/teacher/teacherSpecialties", [authJwt.verifyToken, authJwt.isTeacher], controller.teacherSpecialties);
 
   app.put(
     "/api/teacher/update",

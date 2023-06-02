@@ -41,7 +41,9 @@ require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/teacher.routes')(app);
 require('./app/routes/city.routes')(app);
-
+require('./app/routes/lesson.routes')(app);
+require('./app/routes/series.routes')(app);
+require('./app/routes/subject.routes')(app);
 app.use(errorHandler);
 
 

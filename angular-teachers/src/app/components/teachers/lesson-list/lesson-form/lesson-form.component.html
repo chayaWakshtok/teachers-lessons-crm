@@ -4,18 +4,18 @@
       <div class="col-xl-12">
         <div class="card">
           <div class="card-body py-2">
-            <h4 class="page-title"> <svg cIcon name="cil-applications" title="cil-applications" size="3lg"></svg>Lessons
+            <h4 class="page-title"> <svg cIcon name="cil-applications" title="cil-applications" size="3lg"></svg>Lesson
             </h4>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-xl-6">
+    <div class="row" *ngIf="lesson">
+      <div class=" col-xl-6">
         <div class="card">
           <div class="card-body">
-            <h4 class="mb-3 header-title">Lessons</h4>
+            <h4 class="mb-3 header-title">Lesson</h4>
             <form class="required-form">
               <div id="schedule">
                 <div class="row">
@@ -50,10 +50,34 @@
 
                           <div class="form-group">
                             <label for="topic">
-                              specialty <span class="required">*</span>
+                              Subject <span class="required">*</span>
                             </label>
-                            <select [(ngModel)]="lesson.specialtyId" name="specialtyId" id="specialtyId" class="form-control" placeholder="specialty">
+                            <select [(ngModel)]="lesson.subjectId" class="form-select custom-select" name="subjectId"
+                              id="subjectId" placeholder="subject" (change)="chooseSubject()">
+                              <option *ngFor="let item of subjectList" [value]="item.id">
+                                {{item.name}}</option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="topic">
+                              Specialty
+                            </label>
+                            <select [(ngModel)]="lesson.specialtyId" class="form-select custom-select"
+                              name="specialtyId" id="specialtyId" placeholder="specialty" (change)="chooseSpeciality()">
+                              <option value=0>Without</option>
                               <option *ngFor="let item of specialtyList" [value]="item.id">{{item.name}}</option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="topic">
+                              Series
+                            </label>
+                            <select [(ngModel)]="lesson.seriesId" class="form-select custom-select" name="specialtyId"
+                              id="specialtyId" placeholder="specialty">
+                              <option value=0>Without</option>
+                              <option *ngFor="let item of seriesList" [value]="item.id">{{item.name}}</option>
                             </select>
                           </div>
                         </div>
@@ -62,7 +86,9 @@
                   </div>
                 </div>
               </div>
-
+              <button type="submit" (click)="submit()" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Save Lesson</button>
             </form>
           </div> <!-- end card body-->
         </div> <!-- end card -->

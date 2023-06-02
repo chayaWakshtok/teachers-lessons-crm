@@ -8,8 +8,8 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        day: {
-            type: DataTypes.INTEGER,
+        date: {
+            type: DataTypes.DATE,
             allowNull: false
         },
         fromHour: {

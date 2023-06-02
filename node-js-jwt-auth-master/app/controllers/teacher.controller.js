@@ -28,7 +28,7 @@ exports.update = async (req, res) => {
     const teacher = await db.teacher.findByPk(id);
     Object.assign(teacher, data);
 
-    teacher.save(data)
+    Teacher.save(teacher)
         .then(user => {
             res.send({ message: "Teacher update successfully!" });
         })
@@ -37,19 +37,19 @@ exports.update = async (req, res) => {
         });
 };
 
-exports.teacherSpecialties = async (req, res) => {
+// exports.teacherSpecialties = async (req, res) => {
 
-    var id = req.query.id;
+//     var id = req.query.id;
 
-    const teacher = await db.teacher.findByPk(id,{
-        include: [
-          {
-            model: db.specialty,
-            attributes: ["name","id"],
-            as: "specialties",
-          },
-        ],
-      });
-    res.send({ data: teacher });
+//     const teacher = await db.teacher.findByPk(id,{
+//         include: [
+//           {
+//             model: db.specialty,
+//             attributes: ["name","id"],
+//             as: "specialties",
+//           },
+//         ],
+//       });
+//     res.send({ data: teacher });
 
-};
+// };
