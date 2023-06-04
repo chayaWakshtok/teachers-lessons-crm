@@ -44,6 +44,8 @@ require('./app/routes/city.routes')(app);
 require('./app/routes/lesson.routes')(app);
 require('./app/routes/series.routes')(app);
 require('./app/routes/subject.routes')(app);
+require('./app/routes/holiday.routes')(app);
+
 app.use(errorHandler);
 
 
