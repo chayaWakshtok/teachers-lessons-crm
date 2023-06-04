@@ -12,6 +12,10 @@ module.exports = (sequelize, Sequelize) => {
             type: DataTypes.DATE,
             allowNull: false
         },
+        toDate: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
         fromHour: {
             type: DataTypes.TIME,
             allowNull: true,

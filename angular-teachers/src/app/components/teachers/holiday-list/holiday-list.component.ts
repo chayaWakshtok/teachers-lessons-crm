@@ -6,6 +6,8 @@ import { Lesson } from 'src/app/models/lesson';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/models/user';
 import { LessonService } from 'src/app/services/lesson.service';
+import { Holiday } from 'src/app/models/holiday';
+import { HolidayService } from 'src/app/services/holiday.service';
 
 @Component({
   selector: 'app-holiday-list',
@@ -13,14 +15,14 @@ import { LessonService } from 'src/app/services/lesson.service';
   styleUrls: ['./holiday-list.component.scss']
 })
 export class HolidayListComponent {
-  lessons: Lesson[] = [];
+  holidays: Holiday[] = [];
   user: User | null | undefined;
 
   constructor(
     public router: Router,
     public iconSet: IconSetService,
     public accountService: AccountService,
-    public lessonService: LessonService
+    public holidayService: HolidayService
   ) {
     iconSet.icons = { ...freeSet, ...brandSet, ...flagSet };
   }
@@ -29,8 +31,8 @@ export class HolidayListComponent {
     this.accountService.user.subscribe(x => {
       this.user = x;
 
-      this.lessonService.getAllByTeacher(this.user?.teacher?.id ?? 0).subscribe((res: any) => {
-        this.lessons = res;
+      this.holidayService.getAllByTeacher(this.user?.teacher?.id ?? 0).subscribe((res: any) => {
+        this.holidays = res;
       })
     });
   }
