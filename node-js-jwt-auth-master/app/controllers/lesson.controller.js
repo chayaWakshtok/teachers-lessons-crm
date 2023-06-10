@@ -99,3 +99,19 @@ exports.update = async (req, res) => {
         });
 };
 
+exports.delete = async (req, res) => {
+    // Save User to Database
+    var id = req.query.id;
+
+    const lesson = await db.lesson.findByPk(id);
+
+    lesson.destroy().then(p => {
+
+        res.send({ message: "Lesson delete successfully!" });
+
+    }).catch(err => {
+        res.status(500).send({ message: err.message });
+    });
+
+};
+

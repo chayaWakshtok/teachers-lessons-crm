@@ -13,6 +13,8 @@ module.exports = function (app) {
     app.post("/api/lesson/create", [authJwt.verifyToken, authJwt.isTeacher], controller.create);
     app.get("/api/lesson/getAllByTeacher", [authJwt.verifyToken, authJwt.isTeacher], controller.getAllByTeacher);
     app.get("/api/lesson/findById", [authJwt.verifyToken, authJwt.isTeacher], controller.findById);
+    app.get("/api/lesson/delete", [authJwt.verifyToken, authJwt.isTeacher], controller.delete);
+
 
     app.put(
         "/api/lesson/update",

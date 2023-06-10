@@ -3,8 +3,9 @@
     <div class="row">
       <div class="col-xl-12">
         <div class="card">
-          <div class="card-body py-2">
-            <h4 class="page-title"> <svg cIcon name="cil-applications" title="cil-applications" size="3lg"></svg>Holidays
+          <div class="card-body py-3">
+            <h4 class="page-title"> <svg cIcon name="cil-command" title="cil-command"
+                size="3lg"></svg>Holidays
               <button class="btn btn-outline-primary btn-rounded alignToTitle" (click)="addNew()"><svg cIcon
                   name="cil-plus" title="cil-plus" size="1lg"></svg>Add new holiday</button>
             </h4>
@@ -27,42 +28,35 @@
                       Title
                     </th>
                     <th>
-                      Level
+                      From Date
                     </th>
                     <th>
-                      Duration Hour
+                      To Date
                     </th>
                     <th>
-                      Subject
+                      From Hour
                     </th>
                     <th>
-                      Specialty
+                      Till Hour
                     </th>
                     <th>
-                      Series
-                    </th>
-                    <th>
-                      Created At
-                    </th>
-                    <th>
-                      Updated At
+                      All Day
                     </th>
                     <td>Action</td>
                   </tr>
                 </thead>
-                <tbody *ngIf="lessons&&lessons.length>0">
-                  <tr *ngFor="let item of lessons">
+                <tbody *ngIf="holidays&&holidays.length>0">
+                  <tr *ngFor="let item of holidays">
                     <td>{{item.id}}</td>
                     <td>{{item.title}}</td>
-                    <td>{{item.level}}</td>
-                    <td>{{item.durationHour}}</td>
-                    <td>{{item.subject.name}}</td>
-                    <td>{{item.specialty.name}}</td>
-                    <td>{{item.series?.name??"Without"}}</td>
-                    <td>{{item.createdAt|date :'dd/MM/yyyy hh:mm'}}</td>
-                    <td>{{item.updatedAt|date :'dd/MM/yyyy hh:mm'}}</td>
+                    <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+                    <td>{{item.toDate|date:'dd/MM/yyyy'}}</td>
+                    <td>{{item.fromHour}}</td>
+                    <td>{{item.tillHour}}</td>
+                    <td>{{item.allDay}}</td>
                     <td>
-                      <button class="btn btn-outline-primary btn-rounded" (click)="edit(item.id)">Edit</button>
+                      <a href="javascript:void(1)" style="margin-right: 10px;color: green;"  (click)="edit(item.id)"><svg cIcon name="cil-pencil" title="cil-pencil" size="1lg"></svg></a>
+                      <a href="javascript:void(1)" (click)="delete(item.id)" style="color: red;"><svg cIcon name="cil-x-circle" title="cil-x-circle" size="1lg"></svg></a>
                     </td>
                   </tr>
                 </tbody>

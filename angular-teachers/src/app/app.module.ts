@@ -56,6 +56,7 @@ import { MessageListComponent } from './components/teachers/message-list/message
 import { MessageFormComponent } from './components/teachers/message-list/message-form/message-form.component';
 import { CalanderComponent } from './components/teachers/calander/calander.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { CalendarModule as PrimeCalendarModule } from 'primeng/calendar';
 // import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 // import * as moment from 'moment';
 
@@ -125,11 +126,12 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     ListGroupModule,
     CardModule,
     IconModule,
+    PrimeCalendarModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [
     MessageService,
-    IconSetService ,
+    IconSetService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

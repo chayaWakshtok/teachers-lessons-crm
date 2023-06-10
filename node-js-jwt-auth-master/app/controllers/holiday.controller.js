@@ -64,3 +64,19 @@ exports.update = async (req, res) => {
         });
 };
 
+exports.delete = async (req, res) => {
+    // Save User to Database
+    var id = req.query.id;
+
+    const holiday = await db.holiday.findByPk(id);
+
+    holiday.destroy().then(p => {
+
+        res.send({ message: "Holiday delete successfully!" });
+
+    }).catch(err => {
+        res.status(500).send({ message: err.message });
+    });
+
+};
+

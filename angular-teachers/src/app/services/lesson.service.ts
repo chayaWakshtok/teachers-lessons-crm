@@ -24,7 +24,10 @@ export class LessonService {
 
   findById(id: number) {
     return this.httpClient.get(`${environment.apiUrl}lesson/findById?id=${id}`)
+  }
 
+  delete(id: number) {
+    return this.httpClient.get(`${environment.apiUrl}lesson/delete?id=${id}`)
   }
 
 }

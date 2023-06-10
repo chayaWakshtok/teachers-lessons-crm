@@ -122,6 +122,20 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
+.btn-outline-primary {
+  color: #727cf5 !important;
+  border-color: #727cf5 !important;
+}
+
+.btn-outline-primary:hover {
+  color: #fff !important;
+  background-color: #727cf5 !important;
+  border-color: #727cf5 !important;
+}
+
+.btn-rounded {
+  border-radius: 2em !important;
+}
 // variables
 $base-color: cadetblue;
 $base-font: 'Raleway', sans-serif;
@@ -577,4 +591,12 @@ svg.icon.icon-3lg {
   height: 1.5rem !important;
   font-size: 2rem !important;
   margin-right: 5px;
+}
+table {
+  /* clear: both; */
+  margin-top: 6px!important;
+  margin-bottom: 6px!important;
+  max-width: none!important;
+  border-collapse: separate!important;
+  border-spacing: 0;
 }

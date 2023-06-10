@@ -25,7 +25,10 @@ export class HolidayService {
 
   findById(id: number) {
     return this.httpClient.get(`${environment.apiUrl}holiday/findById?id=${id}`)
+  }
 
+  delete(id: number) {
+    return this.httpClient.get(`${environment.apiUrl}holiday/delete?id=${id}`)
   }
 
 }
