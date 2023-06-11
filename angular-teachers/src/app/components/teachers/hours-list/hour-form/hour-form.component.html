@@ -1,1 +1,78 @@
-<p>hour-form works!</p>
+<div class="content-page">
+    <div class="content">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body py-2">
+                        <h4 class="page-title"> <svg cIcon name="cil-applications" title="cil-applications"
+                                size="3lg"></svg>Hour
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="hour">
+            <div class=" col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="mb-3 header-title">Hour</h4>
+                        <form class="required-form">
+                            <div id="schedule">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label for="topic">
+                                                            Day <span class="required">*</span>
+                                                        </label>
+                                                        <select [(ngModel)]="hour.day" class="form-select custom-select"
+                                                            name="day" id="day" placeholder="Day">
+                                                            <option *ngFor="let item of daysList;let index=index"
+                                                                [value]="index+1">
+                                                                {{item}}</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="topic">
+                                                            From Hour <span class="required">*</span>
+                                                        </label>
+                                                        <input type="time" name="fromHour" id="fromHour"
+                                                            placeholder="From Hour" [(ngModel)]="hour.fromHour"
+                                                            class="form-control" required>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="topic">
+                                                            Till Hour <span class="required">*</span>
+                                                        </label>
+                                                        <input type="time" name="toHour" id="toHour"
+                                                            placeholder="To Hour" [(ngModel)]="hour.tillHour"
+                                                            class="form-control" required>
+                                                    </div>
+
+                                                    <c-form-check sizing="lg" switch>
+                                                        <input cFormCheckInput type="checkbox" name="isActive"
+                                                            id="isActive" [(ngModel)]="hour.isActive" />
+                                                        <label cFormCheckLabel>Is Active</label>
+                                                    </c-form-check>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" (click)="submit()" class="btn btn-primary">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Save Hour</button>
+                        </form>
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div>
+        </div>
+    </div>
+</div>

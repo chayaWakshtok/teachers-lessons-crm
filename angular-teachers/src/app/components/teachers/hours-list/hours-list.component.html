@@ -1,1 +1,63 @@
-<p>hours-list works!</p>
+<div class="content-page">
+    <div class="content">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-body py-3">
+              <h4 class="page-title"> <svg cIcon name="cil-command" title="cil-command"
+                  size="3lg"></svg>Hours
+                <button class="btn btn-outline-primary btn-rounded alignToTitle" (click)="addNew()"><svg cIcon
+                    name="cil-plus" title="cil-plus" size="1lg"></svg>Add new hour</button>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="mb-3 header-title">Hour</h4>
+              <div class="table-responsive-sm mt-4">
+                <table id="basic-datatable" class="table table-striped table-centered mb-0">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>
+                        Day
+                      </th>
+                      <th>
+                        From Hour
+                      </th>
+                      <th>
+                        Till Hour
+                      </th>
+                      <th>
+                        Is Active
+                      </th>
+                      <td>Action</td>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="hours&&hours.length>0">
+                    <tr *ngFor="let item of hours">
+                      <td>{{item.id}}</td>
+                      <td>{{item.day}}</td>
+                      <td>{{item.fromHour}}</td>
+                      <td>{{item.tillHour}}</td>
+                      <td>{{item.isActive}}</td>
+                      <td>
+                        <a href="javascript:void(1)" style="margin-right: 10px;color: green;"  (click)="edit(item.id)"><svg cIcon name="cil-pencil" title="cil-pencil" size="1lg"></svg></a>
+                        <a href="javascript:void(1)" (click)="delete(item.id)" style="color: red;"><svg cIcon name="cil-x-circle" title="cil-x-circle" size="1lg"></svg></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div> <!-- end card body-->
+          </div> <!-- end card -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
