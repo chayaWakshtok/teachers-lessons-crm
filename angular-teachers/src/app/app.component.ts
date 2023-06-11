@@ -50,20 +50,17 @@ export class AppComponent {
     {
       name: 'Hours',
       url: '/teacher/hours',
-      linkProps: { fragment: 'someAnchor' },
-      iconComponent: { name: 'cil-pencil' }
+      iconComponent: { name: 'cil-alarm' }
     },
     {
       name: 'Calander',
       url: '/teacher/calander',
-      linkProps: { fragment: 'someAnchor' },
-      iconComponent: { name: 'cil-pencil' }
+      iconComponent: { name: 'cil-calendar' }
     },
     {
       name: 'Messages',
       url: '/teacher/messages',
-      linkProps: { fragment: 'someAnchor' },
-      iconComponent: { name: 'cil-pencil' }
+      iconComponent: { name: 'cil-envelope-letter' }
     },
   ];
 

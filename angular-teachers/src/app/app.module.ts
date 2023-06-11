@@ -64,6 +64,9 @@ import { CalendarModule as PrimeCalendarModule } from 'primeng/calendar';
 //   return adapterFactory(moment);
 // };
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { HoursListComponent } from './components/teachers/hours-list/hours-list.component';
+import { HourFormComponent } from './components/teachers/hours-list/hour-form/hour-form.component';
+import { DateAccessor } from './helpers/directives/date-input.directive';
 
 
 
@@ -84,6 +87,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     MessageListComponent,
     MessageFormComponent,
     CalanderComponent,
+    HoursListComponent,
+    HourFormComponent,
+    DateAccessor
   ],
   imports: [
     BrowserModule,

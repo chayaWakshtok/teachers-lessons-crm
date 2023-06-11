@@ -8,6 +8,8 @@ import { HomeTeacherComponent } from './components/teachers/home-teacher/home-te
 import { LessonFormComponent } from './components/teachers/lesson-list/lesson-form/lesson-form.component';
 import { LessonListComponent } from './components/teachers/lesson-list/lesson-list.component';
 import { AuthGuard } from './helpers/auth.guard';
+import { HoursListComponent } from './components/teachers/hours-list/hours-list.component';
+import { HourFormComponent } from './components/teachers/hours-list/hour-form/hour-form.component';
 
 const usersModule = () => import('./components/user/user.module').then(x => x.UserModule);
 
@@ -20,6 +22,8 @@ const routes: Routes = [
       { component: LessonFormComponent, path: "lesson" },
       { component: HolidayListComponent, path: "holidays" },
       { component: HolidayFormComponent, path: "holiday" },
+      { component: HoursListComponent, path: "hours" },
+      { component: HourFormComponent, path: "hour" },
     ]
   },
   { path: 'user', loadChildren: usersModule },

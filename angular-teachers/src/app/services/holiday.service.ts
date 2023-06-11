@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Holiday } from '../models/holiday';
 import { Lesson } from '../models/lesson';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,14 @@ export class HolidayService {
 
   findById(id: number) {
     return this.httpClient.get(`${environment.apiUrl}holiday/findById?id=${id}`)
+    .pipe(
+      map((response: any) => response),
+      map((holiday:Holiday) => {
+        holiday.date=new Date(holiday.date);
+        holiday.toDate=new Date(holiday.toDate);
+        return holiday;
+      })
+    );
   }
 
   delete(id: number) {
