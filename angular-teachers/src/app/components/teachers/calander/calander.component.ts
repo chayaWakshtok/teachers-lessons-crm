@@ -104,7 +104,7 @@ export class CalanderComponent implements OnInit {
         this.catchLessons = res;
         this.catchLessons.forEach(r => {
           this.events.push({
-            start: new Date(r.dateFrom), end: new Date(r.dateTo), title: ` lesson: ${r.lesson.title} to: ${r.student.user.firstName} ${r.student.user.lastName}`,
+            start: new Date(r.dateFrom), end: new Date(r.dateTo), title: `${r.lesson.title} to: ${r.student.user.firstName} ${r.student.user.lastName}`,
             color: colors["red"], meta: r
           })
         })
