@@ -20,14 +20,6 @@ module.exports = (sequelize, Sequelize) => {
             type: DataTypes.DATE,
             allowNull: false
         },
-        fromHour: {
-            type: DataTypes.TIME,
-            allowNull: true,
-        },
-        tillHour: {
-            type: DataTypes.TIME,
-            allowNull: true,
-        },
         allDay: {
             type: DataTypes.BOOLEAN,
             defaultValue: true

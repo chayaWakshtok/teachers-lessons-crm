@@ -8,18 +8,14 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        date: {
+        dateFrom: {
             type: DataTypes.DATE,
             allowNull: false
         },
-        fromHour: {
-            type: DataTypes.TIME,
-            allowNull: false,
+        dateTo: {
+            type: DataTypes.DATE,
+            allowNull: false
         },
-        tillHour: {
-            type: DataTypes.TIME,
-            allowNull: false,
-        }
     });
 
     return CatchLesson;

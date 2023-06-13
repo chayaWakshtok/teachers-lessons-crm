@@ -46,6 +46,7 @@ require('./app/routes/series.routes')(app);
 require('./app/routes/subject.routes')(app);
 require('./app/routes/holiday.routes')(app);
 require('./app/routes/hour.routes')(app);
+require('./app/routes/catchLesson.routes')(app);
 
 app.use(errorHandler);
 
@@ -61,26 +62,26 @@ function initial() {
     id: 1,
     name: "student"
   });
- 
+
   Role.create({
     id: 2,
     name: "teacher"
   });
- 
+
   Role.create({
     id: 3,
     name: "admin"
   });
 
   db.city.create({
-    name:"Bnei Brak"
+    name: "Bnei Brak"
   })
 
   db.city.create({
-    name:"Jerusalem"
+    name: "Jerusalem"
   })
 
   db.city.create({
-    name:"Tell Aviv"
+    name: "Tell Aviv"
   })
 }

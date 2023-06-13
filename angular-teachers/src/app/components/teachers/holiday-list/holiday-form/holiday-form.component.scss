@@ -659,7 +659,14 @@ svg.icon.icon-3lg {
   margin-right: 5px;
 }
 
-.custom-select.is-invalid:focus, .custom-select.is-valid:focus, .custom-select:invalid:focus, .custom-select:valid:focus, .form-control.is-invalid:focus, .form-control.is-valid:focus, .form-control:invalid:focus, .form-control:valid:focus {
+.custom-select.is-invalid:focus,
+.custom-select.is-valid:focus,
+.custom-select:invalid:focus,
+.custom-select:valid:focus,
+.form-control.is-invalid:focus,
+.form-control.is-valid:focus,
+.form-control:invalid:focus,
+.form-control:valid:focus {
   box-shadow: none !important;
 }
 
@@ -668,9 +675,24 @@ svg.icon.icon-3lg {
   background-color: #fff;
   border-color: #86b7fe;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
 }
 
-.card{
+.card {
   border-radius: 0.175rem !important;
+}
+
+::ng-deep {
+  .p-calendar-w-btn .p-inputtext {
+    height: 38px;
+    width: 600px !important;
+  }
+
+  .p-calendar-w-btn .p-datepicker-trigger {
+    height: 38px;
+    width: 38px;
+  }
+  p-calendar {
+    display: block;
+}
 }

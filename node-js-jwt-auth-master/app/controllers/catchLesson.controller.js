@@ -16,6 +16,7 @@ exports.getAllByTeacher = (req, res) => {
                 model: db.student,
                 // attributes: ["name", "id"],
                 as: "student",
+                include: [{model:db.user,as:"user"}]
             },
             {
                 model: db.lesson,

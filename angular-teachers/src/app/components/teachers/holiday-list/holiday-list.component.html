@@ -34,12 +34,6 @@
                       To Date
                     </th>
                     <th>
-                      From Hour
-                    </th>
-                    <th>
-                      Till Hour
-                    </th>
-                    <th>
                       All Day
                     </th>
                     <th>
@@ -52,10 +46,8 @@
                   <tr *ngFor="let item of holidays">
                     <td>{{item.id}}</td>
                     <td>{{item.title}}</td>
-                    <td>{{item.date|date:'dd/MM/yyyy'}}</td>
-                    <td>{{item.toDate|date:'dd/MM/yyyy'}}</td>
-                    <td>{{item.fromHour}}</td>
-                    <td>{{item.tillHour}}</td>
+                    <td>{{item.date|date:'dd/MM/yyyy hh:mm'}}</td>
+                    <td>{{item.toDate|date:'dd/MM/yyyy hh:mm'}}</td>
                     <td>{{item.allDay}}</td>
                     <td>{{item.isActive}}</td>
                     <td>
