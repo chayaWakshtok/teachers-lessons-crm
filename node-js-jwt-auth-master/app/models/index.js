@@ -107,7 +107,7 @@ db.message.belongsTo(db.user, {
 db.user.hasMany(db.message, { as: "messagesTo" });
 db.message.belongsTo(db.user, {
   foreignKey: "toUserId",
-  as: "user",
+  as: "toUser",
 });
 
 db.catchLesson.hasMany(db.remark, { as: "remarks" });
@@ -132,7 +132,7 @@ db.teacher.hasMany(db.series, { as: "series" });
 db.series.belongsTo(db.teacher, {
   foreignKey: "teacherId",
   as: "teacher",
-});0
+}); 0
 
 db.user.hasOne(db.teacher);
 db.teacher.belongsTo(db.user);

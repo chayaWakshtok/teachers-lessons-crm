@@ -73,7 +73,7 @@ export class CalanderComponent implements OnInit {
     event: CalendarEvent;
   };
   refresh = new Subject<void>();
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = false;
   events: CalendarEvent<Holiday | catchLesson>[] = [];
   catchLessons: catchLesson[] = [];
 

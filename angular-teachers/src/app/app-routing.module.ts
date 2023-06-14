@@ -10,20 +10,26 @@ import { LessonListComponent } from './components/teachers/lesson-list/lesson-li
 import { AuthGuard } from './helpers/auth.guard';
 import { HoursListComponent } from './components/teachers/hours-list/hours-list.component';
 import { HourFormComponent } from './components/teachers/hours-list/hour-form/hour-form.component';
+import { SeriesListComponent } from './components/teachers/series-list/series-list.component';
+import { SerirsFormComponent } from './components/teachers/series-list/serirs-form/serirs-form.component';
 
 const usersModule = () => import('./components/user/user.module').then(x => x.UserModule);
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   {
-    path: 'teacher', canActivate: [AuthGuard], children: [
-      { component: LessonListComponent, path: "lessons" },
-      { component: CalanderComponent, path: "calander" },
-      { component: LessonFormComponent, path: "lesson" },
-      { component: HolidayListComponent, path: "holidays" },
-      { component: HolidayFormComponent, path: "holiday" },
-      { component: HoursListComponent, path: "hours" },
-      { component: HourFormComponent, path: "hour" },
+    path: 'teacher', canActivate: [AuthGuard], data: {title: 'Teacher',}, children: [
+      {
+        component: LessonListComponent, path: "lessons", data: { title: 'Lessons',}
+      },
+      { component: CalanderComponent, path: "calander" , data: { title: 'Lessons',}},
+      { component: LessonFormComponent, path: "lesson" , data: { title: 'Lesson',}},
+      { component: HolidayListComponent, path: "holidays" , data: { title: 'Holidays',}},
+      { component: HolidayFormComponent, path: "holiday" , data: { title: 'Holiday',}},
+      { component: HoursListComponent, path: "hours" , data: { title: 'Hours',}},
+      { component: HourFormComponent, path: "hour" , data: { title: 'Hour',}},
+      { component: SeriesListComponent, path: "series" , data: { title: 'series',}},
+      { component: SerirsFormComponent, path: "serie" , data: { title: 'serie',}},
     ]
   },
   { path: 'user', loadChildren: usersModule },

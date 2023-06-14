@@ -42,6 +42,7 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
+  DropdownModule as coreDrop
 } from '@coreui/angular';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { LessonListComponent } from './components/teachers/lesson-list/lesson-list.component';
@@ -67,6 +68,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HoursListComponent } from './components/teachers/hours-list/hours-list.component';
 import { HourFormComponent } from './components/teachers/hours-list/hour-form/hour-form.component';
 import { DateAccessor } from './helpers/directives/date-input.directive';
+import { DefaultHeaderComponent } from './components/default-header/default-header.component';
 
 
 
@@ -89,7 +91,8 @@ import { DateAccessor } from './helpers/directives/date-input.directive';
     CalanderComponent,
     HoursListComponent,
     HourFormComponent,
-    DateAccessor
+    DateAccessor,
+    DefaultHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,6 +136,7 @@ import { DateAccessor } from './helpers/directives/date-input.directive';
     CardModule,
     IconModule,
     PrimeCalendarModule,
+    coreDrop,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [

@@ -10,8 +10,10 @@ module.exports = function (app) {
         next();
     });
 
+    app.get("/api/series/findById", [authJwt.verifyToken, authJwt.isTeacher], controller.findById);
     app.post("/api/series/create", [authJwt.verifyToken, authJwt.isTeacher], controller.create);
     app.get("/api/series/getAllByTeacher", [authJwt.verifyToken, authJwt.isTeacher], controller.getAllByTeacher);
+    app.get("/api/hour/delete", [authJwt.verifyToken, authJwt.isTeacher], controller.delete);
 
     app.put(
         "/api/series/update",

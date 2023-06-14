@@ -6,6 +6,6 @@ export class Series {
   fromAge!: number;
   toAge!: number;
   specialtyId!: number;
-  speciality: Specialty | undefined;
+  specialty: Specialty | undefined;
   teacherId!: number;
 }

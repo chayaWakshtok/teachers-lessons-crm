@@ -16,6 +16,14 @@
 //   font-family: var(--font-family);
 // }
 
+.wrapper {
+  width: 100%;
+  @include ltr-rtl("padding-left", var(--bs-sidebar-occupy-start, 0));
+  @include ltr-rtl("padding-right", var(--bs-sidebar-occupy-end, 0));
+  will-change: auto;
+  @include transition(padding .15s);
+}
+
 .card-body {
   padding: 1.5rem 1.5rem !important;
 }
@@ -29,10 +37,6 @@ body {
   color: #6c757d !important;
   text-align: left;
   background-color: #fafbfe;
-}
-
-.wrapper {
-  padding-top: 10px;
 }
 
 .content-page {

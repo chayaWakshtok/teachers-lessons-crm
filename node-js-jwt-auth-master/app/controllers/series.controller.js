@@ -7,6 +7,12 @@ exports.getAllByTeacher = (req, res) => {
     var id = req.query.id;
 
     Series.findAll({
+        include: [
+            {
+                model: db.specialty,
+                as: "specialty",
+            },
+        ],
         where: {
             teacherId: id
         }
@@ -24,7 +30,7 @@ exports.create = (req, res) => {
 
     var data = req.body;
 
-    Lesson.create(data)
+    Series.create(data)
         .then(user => {
             res.send({ message: "Series add successfully!" });
         })
@@ -51,3 +57,38 @@ exports.update = async (req, res) => {
         });
 };
 
+exports.findById = (req, res) => {
+    var id = req.query.id;
+
+    Series.findByPk(id, {
+        include: [
+            {
+                model: db.specialty,
+                as: "specialty",
+            }
+        ]
+    })
+        .then(lesson => {
+            res.send(lesson);
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+        });
+};
+
+
+exports.delete = async (req, res) => {
+    // Save User to Database
+    var id = req.query.id;
+
+    const ser = await db.series.findByPk(id);
+
+    ser.destroy().then(p => {
+
+        res.send({ message: "Series delete successfully!" });
+
+    }).catch(err => {
+        res.status(500).send({ message: err.message });
+    });
+
+};

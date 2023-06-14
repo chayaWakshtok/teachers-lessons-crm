@@ -22,4 +22,11 @@ export class SeriesService {
     return this.httpClient.get(`${environment.apiUrl}series/getAllByTeacher?id=${id}`)
   }
 
+  findById(id: number) {
+    return this.httpClient.get(`${environment.apiUrl}series/findById?id=${id}`)
+  }
+
+  delete(id: number) {
+    return this.httpClient.get(`${environment.apiUrl}series/delete?id=${id}`)
+  }
 }
