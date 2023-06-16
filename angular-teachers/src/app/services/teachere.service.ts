@@ -13,7 +13,7 @@ export class TeachereService {
     return this.httpClient.post(`${environment.apiUrl}teacher/create`, { ...teacher, userId })
   }
 
-  getTeacherSpecialties(teacherId: number | undefined): any {
-    return this.httpClient.get(`${environment.apiUrl}teacher/teacherSpecialties?id=${teacherId}`)
-  }
+  // getTeacherSpecialties(teacherId: number | undefined): any {
+  //   return this.httpClient.get(`${environment.apiUrl}teacher/teacherSpecialties?id=${teacherId}`)
+  // }
 }

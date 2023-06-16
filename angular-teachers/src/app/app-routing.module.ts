@@ -12,24 +12,30 @@ import { HoursListComponent } from './components/teachers/hours-list/hours-list.
 import { HourFormComponent } from './components/teachers/hours-list/hour-form/hour-form.component';
 import { SeriesListComponent } from './components/teachers/series-list/series-list.component';
 import { SerirsFormComponent } from './components/teachers/series-list/serirs-form/serirs-form.component';
+import { HomeStudentComponent } from './components/students/home-student/home-student.component';
 
 const usersModule = () => import('./components/user/user.module').then(x => x.UserModule);
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   {
-    path: 'teacher', canActivate: [AuthGuard], data: {title: 'Teacher',}, children: [
+    path: 'teacher', canActivate: [AuthGuard], data: { title: 'Teacher', }, children: [
       {
-        component: LessonListComponent, path: "lessons", data: { title: 'Lessons',}
+        component: LessonListComponent, path: "lessons", data: { title: 'Lessons', }
       },
-      { component: CalanderComponent, path: "calander" , data: { title: 'Lessons',}},
-      { component: LessonFormComponent, path: "lesson" , data: { title: 'Lesson',}},
-      { component: HolidayListComponent, path: "holidays" , data: { title: 'Holidays',}},
-      { component: HolidayFormComponent, path: "holiday" , data: { title: 'Holiday',}},
-      { component: HoursListComponent, path: "hours" , data: { title: 'Hours',}},
-      { component: HourFormComponent, path: "hour" , data: { title: 'Hour',}},
-      { component: SeriesListComponent, path: "series" , data: { title: 'series',}},
-      { component: SerirsFormComponent, path: "serie" , data: { title: 'serie',}},
+      { component: CalanderComponent, path: "calander", data: { title: 'Lessons', } },
+      { component: LessonFormComponent, path: "lesson", data: { title: 'Lesson', } },
+      { component: HolidayListComponent, path: "holidays", data: { title: 'Holidays', } },
+      { component: HolidayFormComponent, path: "holiday", data: { title: 'Holiday', } },
+      { component: HoursListComponent, path: "hours", data: { title: 'Hours', } },
+      { component: HourFormComponent, path: "hour", data: { title: 'Hour', } },
+      { component: SeriesListComponent, path: "series", data: { title: 'series', } },
+      { component: SerirsFormComponent, path: "serie", data: { title: 'serie', } },
+    ]
+  },
+  {
+    path: 'student', canActivate: [AuthGuard], data: { title: 'Student', }, children: [
+      { component: HomeStudentComponent, path: "lesson", data: { title: 'Lesson', } },
     ]
   },
   { path: 'user', loadChildren: usersModule },

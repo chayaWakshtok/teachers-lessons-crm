@@ -24,4 +24,6 @@ export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
     return `<b>${formatDate(event.start, 'hh:mm a', this.locale)} - ${formatDate(event.end ?? new Date(), 'hh:mm', this.locale)}</b> ${event.title
       }`;
   }
+
+
 }

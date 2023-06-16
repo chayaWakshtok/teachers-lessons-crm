@@ -18,20 +18,6 @@ export class AppComponent {
       url: '/dashboard',
       iconComponent: { name: 'cil-speedometer' },
     },
-    // {
-    //   title: true,
-    //   name: 'Theme'
-    // },
-    // {
-    //   name: 'Specialies',
-    //   url: '/teacher/specialies',
-    //   iconComponent: { name: 'cil-drop' }
-    // },
-    // {
-    //   name: 'Subjects',
-    //   url: '/teacher/subjects',
-    //   iconComponent: { name: 'cil-drop' }
-    // },
     {
       name: 'Series',
       url: '/teacher/series',
@@ -71,8 +57,69 @@ export class AppComponent {
 
   constructor(private accountService: AccountService,
     public iconSet: IconSetService) {
-    this.accountService.user.subscribe(x => { this.user = x;});
+    this.accountService.user.subscribe(x => { this.user = x; });
     iconSet.icons = { ...freeSet, ...brandSet, ...flagSet };
+  }
+
+  ngOnInit(): void {
+    if (this.user?.roleId == 2) {
+      this.navItems = [
+        {
+          name: 'Dashboard',
+          url: '/dashboard',
+          iconComponent: { name: 'cil-speedometer' },
+        },
+        {
+          name: 'Series',
+          url: '/teacher/series',
+          iconComponent: { name: 'cil-drop' }
+        },
+        {
+          name: 'Holidays',
+          url: '/teacher/holidays',
+          iconComponent: { name: 'cil-drop' }
+        },
+        {
+          name: 'Lessons',
+          url: '/teacher/lessons',
+          iconComponent: { name: 'cil-book' }
+        },
+        {
+          name: 'Hours',
+          url: '/teacher/hours',
+          iconComponent: { name: 'cil-alarm' }
+        },
+        {
+          name: 'Calander',
+          url: '/teacher/calander',
+          iconComponent: { name: 'cil-calendar' }
+        },
+        {
+          name: 'Messages',
+          url: '/teacher/messages',
+          iconComponent: { name: 'cil-envelope-letter' }
+        },
+      ];
+
+    }
+    else {
+      this.navItems = [
+        {
+          name: 'Lessons',
+          url: '/student/lesson',
+          iconComponent: { name: 'cil-book' }
+        },
+        {
+          name: 'Messages',
+          url: '/teacher/messages',
+          iconComponent: { name: 'cil-envelope-letter' }
+        },
+      ];
+    }
+  }
+
+  initTab() {
+
   }
 
   logout() {

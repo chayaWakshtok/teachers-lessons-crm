@@ -48,6 +48,7 @@ require('./app/routes/holiday.routes')(app);
 require('./app/routes/hour.routes')(app);
 require('./app/routes/catchLesson.routes')(app);
 require('./app/routes/speciality.routes')(app);
+require('./app/routes/student.routes')(app);
 
 app.use(errorHandler);
 
