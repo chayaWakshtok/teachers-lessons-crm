@@ -7,4 +7,5 @@ export class Remark {
   catchLessonId!: number;
   studentId!: number;
   student: Student | undefined;
+  stars!: number;
 }

@@ -22,6 +22,10 @@ export class LessonService {
     return this.httpClient.get(`${environment.apiUrl}lesson/getAllByTeacher?id=${id}`)
   }
 
+  getAll() {
+    return this.httpClient.get(`${environment.apiUrl}lesson/getAll`)
+  }
+
   findById(id: number) {
     return this.httpClient.get(`${environment.apiUrl}lesson/findById?id=${id}`)
   }

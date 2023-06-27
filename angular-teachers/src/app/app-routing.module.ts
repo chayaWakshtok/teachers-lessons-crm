@@ -35,6 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'student', canActivate: [AuthGuard], data: { title: 'Student', }, children: [
+      { component: HomeStudentComponent, path: "", data: { title: 'Lesson', } },
       { component: HomeStudentComponent, path: "lesson", data: { title: 'Lesson', } },
     ]
   },

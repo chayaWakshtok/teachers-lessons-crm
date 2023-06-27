@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="row">
         <div class="col-xl-12">
           <div class="card">
@@ -27,10 +27,10 @@
                         Name
                       </th>
                       <th>
-                        From Age
+                        Level
                       </th>
                       <th>
-                        To Age
+                       Price
                       </th>
                       <th>
                         Specialty
@@ -42,8 +42,8 @@
                     <tr *ngFor="let item of seriesList">
                       <td>{{item.id}}</td>
                       <td>{{item.name}}</td>
-                      <td>{{item.fromAge}}</td>
-                      <td>{{item.toAge}}</td>
+                      <td>{{item.level}}</td>
+                      <td>{{item.price}}</td>
                       <td>{{item.specialty?.name}}</td>
                       <td>
                         <a href="javascript:void(1)" style="margin-right: 10px;color: green;"  (click)="edit(item.id)"><svg cIcon name="cil-pencil" title="cil-pencil" size="1lg"></svg></a>
@@ -59,4 +59,3 @@
       </div>
     </div>
   </div>
-  

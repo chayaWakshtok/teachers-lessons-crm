@@ -12,14 +12,25 @@ module.exports = (sequelize, Sequelize) => {
             type: DataTypes.DECIMAL,
             defaultValue: 1
         },
-        title:{
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        level:{
+        level: {
             type: DataTypes.INTEGER,
             allowNull: true,
-        }
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        price: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+        },
+        
+
+
     });
 
     return Lesson;

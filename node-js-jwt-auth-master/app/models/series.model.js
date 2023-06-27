@@ -11,14 +11,18 @@ module.exports = (sequelize, Sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        fromAge:{
+        level: {
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        toAge:{
-            type: DataTypes.INTEGER,
+        description: {
+            type: DataTypes.STRING,
             allowNull: true
-        }
+        },
+        price: {
+            type: DataTypes.DECIMAL,
+            allowNull: true
+        },
     });
 
     return Series;

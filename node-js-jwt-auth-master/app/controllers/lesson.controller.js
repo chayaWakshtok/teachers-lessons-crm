@@ -37,6 +37,48 @@ exports.getAllByTeacher = (req, res) => {
         });
 };
 
+exports.getAll = (req, res) => {
+
+    Lesson.findAll({
+        include: [
+            {
+                model: db.specialty,
+                attributes: ["name", "id"],
+                as: "specialty",
+            },
+            {
+                model: db.teacher,
+                as: "teacher",
+                include: [{ model: db.user, as: "user" }]
+            },
+            {
+                model: db.series,
+                attributes: ["name", "id"],
+                as: "series",
+            },
+            {
+                model: db.subject,
+                attributes: ["name", "id"],
+                as: "subject",
+            },
+            {
+                model: db.catchLesson,
+                as: "catchLessons",
+                include: [{ model: db.remark, as: "remarks" }]
+            },
+        ],
+        order: [
+            ['updatedAt', 'DESC'],
+        ],
+    })
+        .then(lessons => {
+            res.send(lessons);
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+        });
+};
+
 
 exports.findById = (req, res) => {
     var id = req.query.id;

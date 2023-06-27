@@ -1,81 +1,76 @@
 <div class="content-page">
-    <div class="content">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body py-2">
-                        <h4 class="page-title"> <svg cIcon name="cil-command" title="cil-command"
-                                size="3lg"></svg>Series
-                        </h4>
-                    </div>
-                </div>
-            </div>
+  <div class="content">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body py-2">
+            <h4 class="page-title"> <svg cIcon name="cil-command" title="cil-command" size="3lg"></svg>Series
+            </h4>
+          </div>
         </div>
-
-        <div class="row" *ngIf="series">
-            <div class=" col-xl-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="mb-3 header-title">Series</h4>
-                        <form class="required-form">
-                            <div id="schedule">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label for="topic">
-                                                            Name <span class="required">*</span>
-                                                        </label>
-                                                        <input type="text" name="title" id="title" class="form-control"
-                                                            placeholder="title" [(ngModel)]="series.name" required>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="topic">
-                                                          From Age <span class="required">*</span>
-                                                        </label>
-                                                        <input type="number" name="fromAge" id="fromAge"
-                                                          [(ngModel)]="series.fromAge" class="form-control" placeholder="from age"
-                                                          required>
-                                                      </div>
-
-                                                      <div class="form-group">
-                                                        <label for="topic">
-                                                          To Age <span class="required">*</span>
-                                                        </label>
-                                                        <input type="number" name="toAge" id="toAge"
-                                                          [(ngModel)]="series.toAge" class="form-control" placeholder="to age"
-                                                          required>
-                                                      </div>
-
-                                                    <div class="form-group">
-                                                        <label for="topic">
-                                                            Specialty
-                                                        </label>
-                                                        <select [(ngModel)]="series.specialtyId"
-                                                            class="form-select custom-select" name="specialtyId"
-                                                            id="specialtyId" placeholder="specialty">
-                                                            <option *ngFor="let item of specialtyList"
-                                                                [value]="item.id">{{item.name}}</option>
-                                                        </select>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" (click)="submit()" class="btn btn-primary">
-                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                                Save Series</button>
-                        </form>
-                    </div> <!-- end card body-->
-                </div> <!-- end card -->
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="row" *ngIf="series">
+      <div class=" col-xl-6">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="mb-3 header-title">Series</h4>
+            <form class="required-form">
+              <div id="schedule">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label for="topic">
+                              Name <span class="required">*</span>
+                            </label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="title"
+                              [(ngModel)]="series.name" required>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="topic">
+                              Level <span class="required">*</span>
+                            </label>
+                            <input type="number" name="level" id="level" class="form-control" placeholder="level"
+                              [(ngModel)]="series.level" required>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="topic">
+                              Price <span class="required">*</span>
+                            </label>
+                            <input type="number" name="price" id="price" class="form-control" placeholder="price"
+                              [(ngModel)]="series.price" required>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="topic">
+                              Specialty
+                            </label>
+                            <select [(ngModel)]="series.specialtyId" class="form-select custom-select"
+                              name="specialtyId" id="specialtyId" placeholder="specialty">
+                              <option *ngFor="let item of specialtyList" [value]="item.id">{{item.name}}</option>
+                            </select>
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" (click)="submit()" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Save Series</button>
+            </form>
+          </div> <!-- end card body-->
+        </div> <!-- end card -->
+      </div>
+    </div>
+  </div>
 </div>
