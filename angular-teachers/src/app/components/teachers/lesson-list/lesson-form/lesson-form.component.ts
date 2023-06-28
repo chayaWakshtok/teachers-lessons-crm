@@ -26,6 +26,7 @@ export class LessonFormComponent implements OnInit {
   subjectList: Subject[] = [];
   seriesList: Series[] = [];
   loading: boolean = false;
+  uploadedFiles: any;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -97,7 +98,7 @@ export class LessonFormComponent implements OnInit {
     }
     else {
       this.lesson.teacherId = this.user?.teacher?.id ?? 0;
-      this.lessonService.add(this.lesson).subscribe((res: any) => {
+      this.lessonService.add(this.lesson, this.uploadedFiles[0]).subscribe((res: any) => {
         this.alertService.success(res.message, { keepAfterRouteChange: true });
         this.loading = false;
         this.router.navigate(['teacher/lessons']);
@@ -107,5 +108,9 @@ export class LessonFormComponent implements OnInit {
       })
 
     }
+  }
+
+  fileChange(element:any) {
+    this.uploadedFiles = element.target.files;
   }
 }
