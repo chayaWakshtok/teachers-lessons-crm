@@ -1,5 +1,6 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controllers/lesson.controller");
+const upload = require("../middleware/upload");
 
 module.exports = function (app) {
     app.use(function (req, res, next) {
@@ -10,7 +11,7 @@ module.exports = function (app) {
         next();
     });
 
-    app.post("/api/lesson/create", [authJwt.verifyToken, authJwt.isTeacher], controller.create);
+    app.post("/api/lesson/create", [upload.single("file"), authJwt.verifyToken, authJwt.isTeacher], controller.create);
     app.get("/api/lesson/getAllByTeacher", [authJwt.verifyToken, authJwt.isTeacher], controller.getAllByTeacher);
     app.get("/api/lesson/getAll", [authJwt.verifyToken, authJwt.isStudent], controller.getAll);
     app.get("/api/lesson/findById", [authJwt.verifyToken, authJwt.isTeacher], controller.findById);

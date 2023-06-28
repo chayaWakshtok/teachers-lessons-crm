@@ -29,7 +29,11 @@ module.exports = (sequelize, Sequelize) => {
         var age_dt = new Date(diff_ms);
         return Math.abs(age_dt.getUTCFullYear() - 1970);
       }
-    }
+    },
+    picture:{
+      type: DataTypes.STRING,
+      allowNull: true
+  },
     //role
   });
 
