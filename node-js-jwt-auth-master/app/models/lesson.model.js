@@ -8,6 +8,7 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
+
         durationHour: {
             type: DataTypes.DECIMAL,
             defaultValue: 1
@@ -28,9 +29,10 @@ module.exports = (sequelize, Sequelize) => {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        
-
-
+        picture:{
+            type: DataTypes.STRING,
+            allowNull: true
+        },
     });
 
     return Lesson;

@@ -12,6 +12,9 @@ exports.signup = (req, res) => {
   // Save User to Database
   var data = req.body;
   data.password = bcrypt.hashSync(req.body.password, 8);
+  if (req.file) {
+    data.picture = req.file.filename;
+ }
 
   User.create(data)
     .then(user => {

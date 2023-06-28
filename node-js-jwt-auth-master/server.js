@@ -14,9 +14,10 @@ app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 //app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(express.static('resources'));
+app.use('/images', express.static('uploads'));
 // parse requests of content-type - application/x-www-form-urlencoded
 //app.use(express.urlencoded({ extended: true }));
 
@@ -51,6 +52,8 @@ require('./app/routes/speciality.routes')(app);
 require('./app/routes/student.routes')(app);
 
 app.use(errorHandler);
+
+global.__basedir = __dirname;
 
 
 // set port, listen for requests

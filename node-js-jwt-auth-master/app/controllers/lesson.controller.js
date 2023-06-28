@@ -114,6 +114,10 @@ exports.create = (req, res) => {
 
     var data = req.body;
 
+    if (req.file) {
+       data.picture = req.file.filename;
+    }
+
     Lesson.create(data)
         .then(user => {
             res.send({ message: "Lesson add successfully!" });
