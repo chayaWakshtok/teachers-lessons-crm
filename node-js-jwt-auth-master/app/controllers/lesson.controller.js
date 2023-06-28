@@ -32,10 +32,12 @@ exports.getAllByTeacher = (req, res) => {
         .then(lessons => {
             res.send(lessons);
         })
+
         .catch(err => {
             res.status(500).send({ message: err.message });
         });
-};
+}
+
 
 exports.getAll = (req, res) => {
 
@@ -72,6 +74,21 @@ exports.getAll = (req, res) => {
         ],
     })
         .then(lessons => {
+            var sum = 0;
+            var total = 0;
+            lessons.forEach(lesson => {
+                lesson.catchLessons.forEach(catchLesson => {
+                    catchLesson.remarks.forEach(remark => {
+                        sum += remark.stars;
+                        total++;
+                    });
+                });
+                if (total > 0)
+                    lesson.stars = Math.round(sum / total);
+                else
+                    lesson.stars = 0;
+            });
+            lessons.sumRemark = total;
             res.send(lessons);
         })
         .catch(err => {

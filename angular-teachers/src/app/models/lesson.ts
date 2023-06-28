@@ -22,4 +22,6 @@ export class Lesson {
   updatedAt!: Date;
   description!: string;
   catchLessons: catchLesson[] = [];
+  stars: number = 0;
+  sumRemark: number = 0;
 }
