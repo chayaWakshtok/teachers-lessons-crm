@@ -24,4 +24,5 @@ export class User {
   accessToken: string | undefined;
   teacher: Teacher | undefined;
   student: Student | undefined;
+  picture: string | undefined;
 }

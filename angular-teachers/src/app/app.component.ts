@@ -106,7 +106,7 @@ export class AppComponent {
       this.navItems = [
         {
           name: 'Lessons',
-          url: '/student/lesson',
+          url: '/student/lessons',
           iconComponent: { name: 'cil-book' }
         },
         {

@@ -13,6 +13,7 @@ import { HourFormComponent } from './components/teachers/hours-list/hour-form/ho
 import { SeriesListComponent } from './components/teachers/series-list/series-list.component';
 import { SerirsFormComponent } from './components/teachers/series-list/serirs-form/serirs-form.component';
 import { HomeStudentComponent } from './components/students/home-student/home-student.component';
+import { LessonShowComponent } from './components/students/lesson-show/lesson-show.component';
 
 const usersModule = () => import('./components/user/user.module').then(x => x.UserModule);
 
@@ -36,7 +37,8 @@ const routes: Routes = [
   {
     path: 'student', canActivate: [AuthGuard], data: { title: 'Student', }, children: [
       { component: HomeStudentComponent, path: "", data: { title: 'Lesson', } },
-      { component: HomeStudentComponent, path: "lesson", data: { title: 'Lesson', } },
+      { component: HomeStudentComponent, path: "lessons", data: { title: 'Lessons', } },
+      { component: LessonShowComponent, path: "lesson/:id", data: { title: 'Lesson', } },
     ]
   },
   { path: 'user', loadChildren: usersModule },

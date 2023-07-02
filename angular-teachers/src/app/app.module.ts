@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
+import { ButtonModule as btnCore } from '@coreui/angular';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -69,6 +70,8 @@ import { HoursListComponent } from './components/teachers/hours-list/hours-list.
 import { HourFormComponent } from './components/teachers/hours-list/hour-form/hour-form.component';
 import { DateAccessor } from './helpers/directives/date-input.directive';
 import { DefaultHeaderComponent } from './components/default-header/default-header.component';
+import { LessonShowComponent } from './components/students/lesson-show/lesson-show.component';
+import { ModalModule } from '@coreui/angular';
 
 
 
@@ -93,6 +96,7 @@ import { DefaultHeaderComponent } from './components/default-header/default-head
     HourFormComponent,
     DateAccessor,
     DefaultHeaderComponent,
+    LessonShowComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,6 +141,8 @@ import { DefaultHeaderComponent } from './components/default-header/default-head
     IconModule,
     PrimeCalendarModule,
     coreDrop,
+    ModalModule,
+    btnCore,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [

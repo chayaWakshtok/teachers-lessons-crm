@@ -1,0 +1,283 @@
+<section class="course-header-area">
+  <div class="container">
+    <div class="row align-items-end">
+      <div class="col-lg-8">
+        <div class="course-header-wrap" *ngIf="lesson">
+          <h1 class="title">{{lesson.title}}</h1>
+          <!-- <p class="subtitle">{{lesson.description}}</p> -->
+          <div class="rating-row">
+            <span class="course-badge best-seller">{{(lesson.level)>=0&&(lesson.level)
+              <4?'Beginner': (lesson.level)>=4&&(lesson.level)<8?'Advanced':'Intermediate'}} </span>
+                  <i class="fas fa-star" [ngClass]="{'filled': lesson.stars>=1}"></i>
+                  <i class="fas fa-star" [ngClass]="{'filled': lesson.stars>=2}"></i>
+                  <i class="fas fa-star" [ngClass]="{'filled': lesson.stars>=3}"></i>
+                  <i class="fas fa-star" [ngClass]="{'filled': lesson.stars>=4}"></i>
+                  <i class="fas fa-star" [ngClass]="{'filled': lesson.stars>=5}"></i>
+                  <span class="d-inline-block average-rating"> {{lesson.stars}}</span><span>({{lesson.sumRemark}}
+                    Ratings)</span>
+                  <span class="enrolled-num">
+                    {{lesson.catchLessons.length}} Students enrolled </span>
+                  <span class="comment"><i class="fas fa-comment"></i>{{lesson.subject.name}}</span>
+          </div>
+          <div class="created-row">
+            <span class="created-by">
+              Created by {{lesson.teacher?.user?.firstName}} {{lesson.teacher?.user?.lastName}}
+            </span>
+            <br>
+            <span class="last-updated-date d-inline-block mt-2">Last updated {{lesson.updatedAt}}</span>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"  *ngIf="lesson">
+  <div class="row">
+    <div class="col-lg-8 order-last order-lg-first radius-10 mt-4 bg-white p-30-40 box-shadow-5">
+
+      <div class="description-box view-more-parent expanded">
+
+        <div class="description-title">Course overview</div>
+        <div class="description-content-wrap">
+          <div class="description-content">
+            <p>
+              {{lesson.description}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="about-instructor-box">
+        <div class="about-instructor-title">
+          Catch Lesson </div>
+        <div class="row">
+          <div class="col-md-8 py-0 px-3 text-md-start">
+            <p class="fw-500 text-14px w-100"></p>
+            <div class="rating row">
+              <div class="col-6">
+                <select class="form-control" aria-label="Date Lesson"  [(ngModel)]="catchLesson.dateFrom">
+                  <option [value]="null">Choose Date</option>
+                  <option *ngFor="let dates of dateSelect" [value]="dates">
+                    {{dates | date:'dd/MM/yyyy'}}
+                </select>
+              </div>
+              <div class="col-6">
+                <select class="form-control" aria-label="Date Lesson">
+                  <option [value]="null">Choose Time</option>
+                </select>
+              </div>
+            </div>
+            <span class="badge badge-sub-warning text-12px my-1 py-2"></span>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+      <!-- <div class="about-instructor-box">
+        <div class="about-instructor-title">
+          About instructor </div>
+        <div class="row justify-content-center">
+          <div class="col-md-4 top-instructor-img w-sm-100">
+            <a href="https://demo.creativeitem.com/academy/home/instructor_page/6">
+              <img class="radius-10"
+                src="https://demo.creativeitem.com/academy/uploads/user_image/optimized/bf1a9992aa04e8b968ef630e477b55f5.jpg"
+                width="100%">
+            </a>
+          </div>
+          <div class="col-md-8 py-0 px-3 text-center text-md-start">
+            <h4 class="mb-1 fw-600 v"><a class="text-decoration-none"
+                href="https://demo.creativeitem.com/academy/home/instructor_page/6">Mathew Anderson</a></h4>
+            <p class="fw-500 text-14px w-100"></p>
+            <div class="rating">
+              <div class="d-inline-block mb-2">
+                <span class="text-dark fw-800 text-muted ms-1 text-13px">4 Reviews</span>
+                |
+                <span class="text-dark fw-800 text-13px text-muted mx-1">
+                  4 Students </span>
+                |
+                <span class="text-dark fw-800 text-14px text-muted">
+                  4 Courses </span>
+              </div>
+            </div>
+            <span class="badge badge-sub-warning text-12px my-1 py-2"></span>
+          </div>
+        </div>
+      </div> -->
+      <!--
+      <div class="student-feedback-box mt-5 pb-3">
+        <div class="student-feedback-title">
+          Student feedback </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="average-rating ms-auto me-auto float-md-start mb-sm-4">
+              <div class="num">
+                0 </div>
+              <div class="rating">
+                <i class="fas fa-star" style="color: #abb0bb;"></i>
+                <i class="fas fa-star" style="color: #abb0bb;"></i>
+                <i class="fas fa-star" style="color: #abb0bb;"></i>
+                <i class="fas fa-star" style="color: #abb0bb;"></i>
+                <i class="fas fa-star" style="color: #abb0bb;"></i>
+              </div>
+              <div class="title text-15px fw-700">0 Reviews</div>
+            </div>
+            <div class="individual-rating">
+              <ul>
+                <li>
+                  <div>
+                    <span class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star filled"></i>
+
+                    </span>
+                  </div>
+                  <div class="progress ms-2 mt-1">
+                    <div class="progress-bar" style="width: 0%"></div>
+                  </div>
+                  <span class="d-inline-block ps-2 text-15px fw-500">
+                    (0)
+                  </span>
+                </li>
+                <li>
+                  <div>
+                    <span class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+
+                    </span>
+                  </div>
+                  <div class="progress ms-2 mt-1">
+                    <div class="progress-bar" style="width: 0%"></div>
+                  </div>
+                  <span class="d-inline-block ps-2 text-15px fw-500">
+                    (0)
+                  </span>
+                </li>
+                <li>
+                  <div>
+                    <span class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+
+                    </span>
+                  </div>
+                  <div class="progress ms-2 mt-1">
+                    <div class="progress-bar" style="width: 0%"></div>
+                  </div>
+                  <span class="d-inline-block ps-2 text-15px fw-500">
+                    (0)
+                  </span>
+                </li>
+                <li>
+                  <div>
+                    <span class="rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+
+                    </span>
+                  </div>
+                  <div class="progress ms-2 mt-1">
+                    <div class="progress-bar" style="width: 0%"></div>
+                  </div>
+                  <span class="d-inline-block ps-2 text-15px fw-500">
+                    (0)
+                  </span>
+                </li>
+                <li>
+                  <div>
+                    <span class="rating">
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+
+                    </span>
+                  </div>
+                  <div class="progress ms-2 mt-1">
+                    <div class="progress-bar" style="width: 0%"></div>
+                  </div>
+                  <span class="d-inline-block ps-2 text-15px fw-500">
+                    (0)
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="reviews mt-5">
+          <h3>Reviews</h3>
+          <ul>
+          </ul>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="col-lg-4 order-first order-lg-last" style="padding-right: 0px;">
+      <div class="course-sidebar box-shadow-5" style="top: auto;">
+
+        <div class="course-sidebar-text-box">
+          <div class="price text-center">
+            <span class="current-price"><span class="current-price">${{lesson.price}}</span></span>
+            <input type="hidden" id="total_price_of_checking_out" value="$524">
+          </div>
+
+          <div class="buy-btns">
+            <button class="btn btn-buy-now" type="button" id="30" (click)="toggleLiveDemo()">Catch lesson</button>
+          </div>
+
+
+          <div class="includes">
+            <div class="title"><b>Includes:</b></div>
+            <ul>
+              <li><i class="far fa-file-video"></i>
+                {{lesson.durationHour}} Hours </li>
+              <li><i class="fas fa-mobile-alt"></i>{{lesson.teacher?.place}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Catch lesson {{lesson.title}}</h5>
+    <button (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <div>
+      <p-calendar [(ngModel)]="dateCatch" [disabledDates]="dateDisable" [minDate]="minDate"></p-calendar>
+    </div>
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleLiveDemo()" cButton color="secondary" class="btn">
+      Close
+    </button>
+    <button cButton color="primary" class="btn btn-primary" (click)="toggleLiveDemo()">Save changes</button>
+  </c-modal-footer>
+</c-modal> -->

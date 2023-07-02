@@ -8,7 +8,7 @@ export class Lesson {
   id!: number;
   durationHour: number = 1;
   title!: string;
-  level: number | undefined;
+  level!: number;
   teacher: Teacher | undefined;
   teacherId!: number;
   specialtyId!: number;
@@ -24,4 +24,5 @@ export class Lesson {
   catchLessons: catchLesson[] = [];
   stars: number = 0;
   sumRemark: number = 0;
+  picture: string | undefined;
 }

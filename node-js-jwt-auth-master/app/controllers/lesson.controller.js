@@ -2,6 +2,7 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const Lesson = db.lesson;
 const Op = db.Sequelize.Op;
+const Sequelize = require("sequelize");
 
 exports.getAllByTeacher = (req, res) => {
     var id = req.query.id;
@@ -74,9 +75,10 @@ exports.getAll = (req, res) => {
         ],
     })
         .then(lessons => {
-            var sum = 0;
-            var total = 0;
+
             lessons.forEach(lesson => {
+                var sum = 0;
+                var total = 0;
                 lesson.catchLessons.forEach(catchLesson => {
                     catchLesson.remarks.forEach(remark => {
                         sum += remark.stars;
@@ -84,11 +86,11 @@ exports.getAll = (req, res) => {
                     });
                 });
                 if (total > 0)
-                    lesson.stars = Math.round(sum / total);
+                    lesson.setDataValue('stars', sum / total);
                 else
-                    lesson.stars = 0;
+                    lesson.setDataValue('stars', 0);
+                lesson.setDataValue('sumRemark', total);
             });
-            lessons.sumRemark = total;
             res.send(lessons);
         })
         .catch(err => {
@@ -117,9 +119,32 @@ exports.findById = (req, res) => {
                 attributes: ["name", "id"],
                 as: "subject",
             },
+            {
+                model: db.teacher,
+                include: [{ model: db.user, as: "user" }],
+                as: "teacher",
+            },
+            {
+                model: db.catchLesson,
+                as: "catchLessons",
+                include: [{ model: db.remark, as: "remarks" }]
+            },
         ]
     })
         .then(lesson => {
+            var sum = 0;
+            var total = 0;
+            lesson.catchLessons.forEach(catchLesson => {
+                catchLesson.remarks.forEach(remark => {
+                    sum += remark.stars;
+                    total++;
+                });
+            });
+            if (total > 0)
+                lesson.setDataValue('stars', sum / total);
+            else
+                lesson.setDataValue('stars', 0);
+            lesson.setDataValue('sumRemark', total);
             res.send(lesson);
         })
         .catch(err => {
@@ -132,7 +157,7 @@ exports.create = (req, res) => {
     var data = req.body;
 
     if (req.file) {
-       data.picture = req.file.filename;
+        data.picture = req.file.filename;
     }
 
     Lesson.create(data)

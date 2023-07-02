@@ -44,6 +44,9 @@
                     <th>
                       Series
                     </th>
+                    <!-- <th>
+                      Picture
+                    </th> -->
                     <th>
                       Created At
                     </th>
@@ -63,11 +66,14 @@
                     <td>{{item.subject.name}}</td>
                     <td>{{item.specialty.name}}</td>
                     <td>{{item.series?.name??"Without"}}</td>
+                    <!-- <td><img src="https://placebeard.it/640x360"></td> -->
                     <td>{{item.createdAt|date :'dd/MM/yyyy hh:mm'}}</td>
                     <td>{{item.updatedAt|date :'dd/MM/yyyy hh:mm'}}</td>
                     <td>
-                      <a href="javascript:void(1)" style="margin-right: 10px;color: green;"  (click)="edit(item.id)"><svg cIcon name="cil-pencil" title="cil-pencil" size="1lg"></svg></a>
-                      <a href="javascript:void(1)" (click)="delete(item.id)" style="color: red;"><svg cIcon name="cil-x-circle" title="cil-x-circle" size="1lg"></svg></a>
+                      <a href="javascript:void(1)" style="margin-right: 10px;color: green;" (click)="edit(item.id)"><svg
+                          cIcon name="cil-pencil" title="cil-pencil" size="1lg"></svg></a>
+                      <a href="javascript:void(1)" (click)="delete(item.id)" style="color: red;"><svg cIcon
+                          name="cil-x-circle" title="cil-x-circle" size="1lg"></svg></a>
                     </td>
                   </tr>
                 </tbody>

@@ -6,7 +6,7 @@ import { Remark } from "./remark";
 
 export class catchLesson {
   id!: number;
-  dateFrom!: Date;
+  dateFrom: Date=null!;
   dateTo!: Date;
   teacherId!: number;
   studentId!: number;

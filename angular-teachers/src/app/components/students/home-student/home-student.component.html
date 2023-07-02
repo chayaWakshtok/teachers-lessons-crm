@@ -1,28 +1,4 @@
-<!-- <div class="row">
-  <div class="col-sm-3" *ngFor="let item of lessons">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="card-title">{{item.title}}</h5>
-      </div>
-      <div class="card-body">
-        <p class="card-text">Subject: {{item.subject.name}}
-          <br>
-          Series: {{item.series?.name}}
-          <br>
-          Specialty: {{item.specialty.name}}
-          <br>
-          Teacher: {{item.teacher?.user?.firstName}} {{item.teacher?.user?.lastName}}
-          <br>
-          Level: {{item.level}}
-          <br>
-          Duretion: {{item.durationHour}}
-          <br>
-        </p>
-        <a href="#" class="btn btn-primary">Choose</a>
-      </div>
-    </div>
-  </div>
-</div> -->
+
 <div class="container">
   <div class="row">
     <div class="col-lg-3 filter-area">
@@ -35,7 +11,7 @@
                 <li class="">
                   <div class="text-15px fw-700 d-flex">
                     <input type="radio" id="category_all" name="sub_category" class="categories custom-radio"
-                      value="all" onclick="filter(this)" checked="">
+                      value="all" (click)="subjectId=0; filter()" checked="">
                     <label for="category_all">All category</label>
                     <div class="ms-auto">({{this.subjectsList.length}})</div>
                   </div>
@@ -44,18 +20,19 @@
                   <li class="mt-3">
                     <div class="text-15px fw-700  d-flex">
                       <input type="radio" id="category-10" name="sub_category" class="categories custom-radio"
-                        value="web-design" onclick="filter(this)">
+                        value="web-design" (click)="subjectId=item.id; filter()">
                       <label for="category-10">{{item.name}}</label>
-                      <div class="ms-auto">(4)</div>
+                      <div class="ms-auto">({{item.lessonsCount}})</div>
                     </div>
                   </li>
                   <ng-container *ngFor="let sp of item.specialties">
                     <li class="ms-3">
                       <div class=" d-flex">
-                        <input type="radio" id="sub_category-11" name="sub_category" class="categories custom-radio"
-                          value="responsive-design" onclick="filter(this)">
-                        <label for="sub_category-11">{{sp.name}}</label>
-                        <div class="ms-auto">(0)</div>
+                        <input type="radio" [id]="'sub_category-'+sp.id" name="sub_category"
+                          class="categories custom-radio" value="responsive-design"
+                          (click)="specialtyId=sp.id; filter()">
+                        <label [for]="'sub_category-'+sp.id">{{sp.name}}</label>
+                        <div class="ms-auto">({{sp.specialtiesCount}})</div>
                       </div>
                     </li>
                   </ng-container>
@@ -69,22 +46,22 @@
                 <li>
                   <div class="">
                     <input type="radio" id="all" name="level" class="level custom-radio" value="all"
-                      onclick="filter(this)" checked="">
+                      (click)="level=0; filter()" checked="">
                     <label for="all">All</label>
                   </div>
                   <div class="">
                     <input type="radio" id="beginner" name="level" class="level custom-radio" value="beginner"
-                      onclick="filter(this)">
+                      (click)="level=1; filter()">
                     <label for="beginner">Beginner</label>
                   </div>
                   <div class="">
                     <input type="radio" id="advanced" name="level" class="level custom-radio" value="advanced"
-                      onclick="filter(this)">
+                      (click)="level=2; filter()">
                     <label for="advanced">Advanced</label>
                   </div>
                   <div class="">
                     <input type="radio" id="intermediate" name="level" class="level custom-radio" value="intermediate"
-                      onclick="filter(this)">
+                      (click)="level=3; filter()">
                     <label for="intermediate">Intermediate</label>
                   </div>
                 </li>
@@ -97,14 +74,14 @@
                 <li>
                   <div class="">
                     <input type="radio" id="all_rating" name="rating" class="ratings custom-radio" value="all"
-                      onclick="filter(this)" checked="">
+                      (click)="stars=0; filter()" checked="">
                     <label for="all_rating">All</label>
                   </div>
                 </li>
                 <li>
                   <div class="">
                     <input type="radio" id="rating_1" name="rating" class="ratings custom-radio" value="1"
-                      onclick="filter(this)">
+                      (click)="stars=1; filter()">
                     <label for="rating_1">
                       <i class="fas fa-star" style="color: #f4c150;"></i>
                       <i class="far fa-star" style="color: #dedfe0;"></i>
@@ -117,7 +94,7 @@
                 <li>
                   <div class="">
                     <input type="radio" id="rating_2" name="rating" class="ratings custom-radio" value="2"
-                      onclick="filter(this)">
+                      (click)="stars=2; filter()">
                     <label for="rating_2">
                       <i class="fas fa-star" style="color: #f4c150;"></i>
                       <i class="fas fa-star" style="color: #f4c150;"></i>
@@ -130,7 +107,7 @@
                 <li>
                   <div class="">
                     <input type="radio" id="rating_3" name="rating" class="ratings custom-radio" value="3"
-                      onclick="filter(this)">
+                      (click)="stars=3; filter()">
                     <label for="rating_3">
                       <i class="fas fa-star" style="color: #f4c150;"></i>
                       <i class="fas fa-star" style="color: #f4c150;"></i>
@@ -143,7 +120,7 @@
                 <li>
                   <div class="">
                     <input type="radio" id="rating_4" name="rating" class="ratings custom-radio" value="4"
-                      onclick="filter(this)">
+                      (click)="stars=4; filter()">
                     <label for="rating_4">
                       <i class="fas fa-star" style="color: #f4c150;"></i>
                       <i class="fas fa-star" style="color: #f4c150;"></i>
@@ -156,7 +133,7 @@
                 <li>
                   <div class="">
                     <input type="radio" id="rating_5" name="rating" class="ratings custom-radio" value="5"
-                      onclick="filter(this)">
+                      (click)="stars=5; filter()">
                     <label for="rating_5">
                       <i class="fas fa-star" style="color: #f4c150;"></i>
                       <i class="fas fa-star" style="color: #f4c150;"></i>
@@ -190,13 +167,13 @@
                 'show': openMenu
               }" data-popper-placement="bottom-end"
               style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(-86px, 32px);">
-              <li><a (click)="chooseMenu='Newest';openMenu=!openMenu"
+              <li><a (click)="chooseMenu='Newest';openMenu=!openMenu;sort()"
                   class="dropdown-item text-12px fw-600 text-capitalize" href="javascript:;">Newest</a></li>
-              <li><a (click)="chooseMenu='Highest rating';openMenu=!openMenu"
+              <li><a (click)="chooseMenu='Highest rating';openMenu=!openMenu;sort()"
                   class="dropdown-item text-12px fw-600 text-capitalize" href="javascript:;">Highest rating</a></li>
-              <li><a (click)="chooseMenu='Lowest price';openMenu=!openMenu"
+              <li><a (click)="chooseMenu='Lowest price';openMenu=!openMenu;sort()"
                   class="dropdown-item text-12px fw-600 text-capitalize" href="javascript:;">Lowest price</a></li>
-              <li><a (click)="chooseMenu='Highest price';openMenu=!openMenu"
+              <li><a (click)="chooseMenu='Highest price';openMenu=!openMenu;sort()"
                   class="dropdown-item text-12px fw-600 text-capitalize" href="javascript:;">Highest price</a></li>
             </ul>
           </div>
@@ -204,21 +181,21 @@
       </div>
       <div class="category-course-list">
         <div class="row">
-          <div class="col-md-6 col-xl-4 px-0" *ngFor="let lesson of lessons">
-            <div class="course-box-wrap">
+          <div class="col-md-6 col-xl-4 px-0" *ngFor="let lesson of lessonsSearch">
+            <div class="course-box-wrap" (click)="clickLesson(lesson)">
               <a href="javascript:;" class="has-popover">
                 <div class="course-box">
                   <div class="course-image">
                     <p class="price text-right d-inline-block float-end"><small></small>${{lesson.price}}</p>
-                    <!--
-                    <img
-                      src="https://demo.creativeitem.com/academy/uploads/thumbnails/course_thumbnails/optimized/course_thumbnail_default_211562457600.jpg"
-                      alt="" class="img-fluid"> -->
+                    <!-- [src]="lesson.picture" -->
+                    <!-- <img *ngIf="!lesson.picture" alt=""  src="../../../../../assets/img/pictures.png"
+                      alt="" class="img-fluid" style="width: 70%;"> -->
                   </div>
                   <div class="course-details">
                     <div class="row mb-3">
                       <div class="col-12">
-                        <span class="badge badge-primary text-11px">{{lesson.level}}</span>
+                        <span class="badge badge-primary text-11px">{{(lesson.level)>=0&&(lesson.level)
+                          <4?'Beginner': (lesson.level)>=4&&(lesson.level)<8?'Advanced':'Intermediate'}} </span>
                       </div>
                     </div>
                     <h5 class="title">{{lesson.title}}</h5>

@@ -11,7 +11,7 @@ module.exports = function (app) {
     });
 
     // app.post("/api/holiday/create", [authJwt.verifyToken, authJwt.isTeacher], controller.create);
-    app.get("/api/catchLesson/getAllByTeacher", [authJwt.verifyToken, authJwt.isTeacher], controller.getAllByTeacher);
+    app.get("/api/catchLesson/getAllByTeacher", [authJwt.verifyToken], controller.getAllByTeacher);
     // app.get("/api/holiday/findById", [authJwt.verifyToken, authJwt.isTeacher], controller.findById);
     //app.get("/api/holiday/delete", [authJwt.verifyToken, authJwt.isTeacher], controller.delete);
 
