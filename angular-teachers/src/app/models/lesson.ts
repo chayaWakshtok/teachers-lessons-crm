@@ -6,7 +6,7 @@ import { Teacher } from "./teacher";
 
 export class Lesson {
   id!: number;
-  durationHour: number = 1;
+  durationHour: number = 60;
   title!: string;
   level!: number;
   teacher: Teacher | undefined;

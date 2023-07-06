@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Holiday } from '../models/holiday';
 import { Lesson } from '../models/lesson';
 import { map } from 'rxjs';
+import { catchLesson } from '../models/catch-lesson';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,20 @@ export class CatchLessonService {
 
   constructor(public httpClient: HttpClient) { }
 
-  // add(holiday: Holiday) {
-  //   return this.httpClient.post(`${environment.apiUrl}holiday/create`, { ...holiday })
-  // }
+  add(catchLesson: catchLesson) {
+    return this.httpClient.post(`${environment.apiUrl}catchLesson/create`, { ...catchLesson })
+  }
 
-  // update(holiday: Holiday) {
-  //   return this.httpClient.put(`${environment.apiUrl}holiday/update`, { ...holiday })
-  // }
+  update(catchLesson: catchLesson) {
+    return this.httpClient.put(`${environment.apiUrl}catchLesson/update`, { ...catchLesson })
+  }
 
   getAllByTeacher(id: number) {
     return this.httpClient.get(`${environment.apiUrl}catchLesson/getAllByTeacher?id=${id}`)
+  }
+
+  getAllByStudent(id: number) {
+    return this.httpClient.get(`${environment.apiUrl}catchLesson/getAllByStudent?id=${id}`)
   }
 
   // findById(id: number) {
@@ -36,8 +41,8 @@ export class CatchLessonService {
   //   );
   // }
 
-  // delete(id: number) {
-  //   return this.httpClient.get(`${environment.apiUrl}holiday/delete?id=${id}`)
-  // }
+  delete(id: number) {
+    return this.httpClient.get(`${environment.apiUrl}catchLesson/delete?id=${id}`)
+  }
 
 }

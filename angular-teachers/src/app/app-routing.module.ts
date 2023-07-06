@@ -14,6 +14,7 @@ import { SeriesListComponent } from './components/teachers/series-list/series-li
 import { SerirsFormComponent } from './components/teachers/series-list/serirs-form/serirs-form.component';
 import { HomeStudentComponent } from './components/students/home-student/home-student.component';
 import { LessonShowComponent } from './components/students/lesson-show/lesson-show.component';
+import { StudentCalanderComponent } from './components/students/student-calander/student-calander.component';
 
 const usersModule = () => import('./components/user/user.module').then(x => x.UserModule);
 
@@ -39,6 +40,8 @@ const routes: Routes = [
       { component: HomeStudentComponent, path: "", data: { title: 'Lesson', } },
       { component: HomeStudentComponent, path: "lessons", data: { title: 'Lessons', } },
       { component: LessonShowComponent, path: "lesson/:id", data: { title: 'Lesson', } },
+      { component: StudentCalanderComponent, path: "calander", data: { title: 'Calander', } },
+
     ]
   },
   { path: 'user', loadChildren: usersModule },

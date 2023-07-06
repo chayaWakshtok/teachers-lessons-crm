@@ -12,18 +12,6 @@ export class LessonService {
   constructor(public httpClient: HttpClient) { }
 
   add(lesson: Lesson, file: any) {
-    let formData = new FormData();
-    debugger;
-    formData.append("file", file, file.name);
-    formData.append("durationHour", lesson.durationHour.toString());
-    formData.append("title", lesson.title);
-    formData.append("level", lesson.level ? lesson.level.toString() : "");
-    formData.append("teacherId", lesson.teacherId.toString());
-    formData.append("specialtyId", lesson.specialtyId.toString());
-    formData.append("subjectId", lesson.subjectId.toString());
-    formData.append("seriesId", lesson.seriesId ? lesson.seriesId.toString() : "");
-    formData.append("price", lesson.price.toString());
-    formData.append("description", lesson.description);
 
     return this.httpClient.post(`${environment.apiUrl}lesson/create`, { ...lesson })
   }

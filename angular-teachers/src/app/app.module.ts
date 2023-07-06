@@ -57,7 +57,7 @@ import { HolidayFormComponent } from './components/teachers/holiday-list/holiday
 import { MessageListComponent } from './components/teachers/message-list/message-list.component';
 import { MessageFormComponent } from './components/teachers/message-list/message-form/message-form.component';
 import { CalanderComponent } from './components/teachers/calander/calander.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { CalendarDateFormatter, CalendarModule, CalendarNativeDateFormatter, DateAdapter, DateFormatterParams } from 'angular-calendar';
 import { CalendarModule as PrimeCalendarModule } from 'primeng/calendar';
 // import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 // import * as moment from 'moment';
@@ -72,6 +72,8 @@ import { DateAccessor } from './helpers/directives/date-input.directive';
 import { DefaultHeaderComponent } from './components/default-header/default-header.component';
 import { LessonShowComponent } from './components/students/lesson-show/lesson-show.component';
 import { ModalModule } from '@coreui/angular';
+import { StudentCalanderComponent } from './components/students/student-calander/student-calander.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -97,6 +99,7 @@ import { ModalModule } from '@coreui/angular';
     DateAccessor,
     DefaultHeaderComponent,
     LessonShowComponent,
+    StudentCalanderComponent,
   ],
   imports: [
     BrowserModule,
@@ -143,7 +146,20 @@ import { ModalModule } from '@coreui/angular';
     coreDrop,
     ModalModule,
     btnCore,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModule,
+    CalendarModule.forRoot(
+      {
+        provide: DateAdapter,
+        useFactory: adapterFactory,
+      },
+      {
+        dateFormatter: {
+          provide: CalendarDateFormatter,
+          useClass: AppModule,
+        },
+      }
+    ),
+
   ],
   providers: [
     MessageService,
@@ -153,4 +169,11 @@ import { ModalModule } from '@coreui/angular';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule extends CalendarNativeDateFormatter {
+  public override weekViewHour({ date, locale }: DateFormatterParams): string {
+    return new Intl.DateTimeFormat('pt-BR', {
+      hour: 'numeric',
+      minute: 'numeric',
+    }).format(date);
+  }
+}

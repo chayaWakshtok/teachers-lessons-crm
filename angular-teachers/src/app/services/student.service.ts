@@ -12,4 +12,10 @@ export class StudentService {
   registerStudent(student: any, userId: number) {
     return this.httpClient.post(`${environment.apiUrl}student/create`, { ...student, userId })
   }
+
+  time_convert(num: number) {
+    var hours = Math.floor(num / 60);
+    var minutes = num % 60;
+    return [hours, minutes];
+  }
 }

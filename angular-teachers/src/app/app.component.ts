@@ -111,8 +111,13 @@ export class AppComponent {
         },
         {
           name: 'Messages',
-          url: '/teacher/messages',
+          url: '/student/messages',
           iconComponent: { name: 'cil-envelope-letter' }
+        },
+        {
+          name: 'Calander',
+          url: '/student/calander',
+          iconComponent: { name: 'cil-calendar' }
         },
       ];
     }
