@@ -1,0 +1,72 @@
+<div class="content-page">
+  <div class="content">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body py-3">
+            <h4 class="page-title"> <svg cIcon name="cil-command" title="cil-command" size="3lg"></svg>Catch Lessons
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="mb-3 header-title">Catch Lessons</h4>
+            <div class="table-responsive-sm mt-4">
+              <table id="basic-datatable" class="table table-striped table-centered mb-0">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>
+                      Lesson
+                    </th>
+                    <th>
+                      Date
+                    </th>
+                    <th>
+                      Duretion
+                    </th>
+                    <th>
+                      Price
+                    </th>
+                    <th>
+                      Teacher
+                    </th>
+                    <th>
+                      Is Over
+                    </th>
+                    <td>Action</td>
+                  </tr>
+                </thead>
+                <tbody *ngIf="catchLessons&&catchLessons.length>0">
+                  <tr *ngFor="let item of catchLessons">
+                    <td>{{item.id}}</td>
+                    <td>{{item.lesson.title}}</td>
+                    <td>{{item.dateFrom |date:'dd/MM/yyyy hh:mm'}}</td>
+                    <td>{{item.lesson.durationHour}}</td>
+                    <td>{{item.lesson.price}}</td>
+                    <td>{{item.teacher.user?.firstName}} {{item.teacher.user?.lastName}}</td>
+                    <td>{{item.dateFrom>now?'true':"false"}}</td>
+                    <td>
+                      <a href="javascript:void(1)" cTooltip="Send Message" cTooltipPlacement="top"
+                        style="margin-right: 10px;color: green;" (click)="sendMessage(item.id)"><svg cIcon
+                          name="cil-paper-plane" title="cil-paper-plane" size="1lg"></svg></a>
+                      <a href="javascript:void(1)" *ngIf="item.dateFrom>dayBefore" (click)="delete(item.id)"
+                        cTooltip="Delete" cTooltipPlacement="top" style="color: red;"><svg cIcon name="cil-x-circle"
+                          title="cil-x-circle" size="1lg"></svg></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div> <!-- end card body-->
+        </div> <!-- end card -->
+      </div>
+    </div>
+  </div>
+</div>
+
+

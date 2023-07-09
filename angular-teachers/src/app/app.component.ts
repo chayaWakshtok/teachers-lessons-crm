@@ -69,11 +69,11 @@ export class AppComponent {
           url: '/dashboard',
           iconComponent: { name: 'cil-speedometer' },
         },
-        {
-          name: 'Series',
-          url: '/teacher/series',
-          iconComponent: { name: 'cil-drop' }
-        },
+        // {
+        //   name: 'Series',
+        //   url: '/teacher/series',
+        //   iconComponent: { name: 'cil-drop' }
+        // },
         {
           name: 'Holidays',
           url: '/teacher/holidays',
@@ -118,6 +118,11 @@ export class AppComponent {
           name: 'Calander',
           url: '/student/calander',
           iconComponent: { name: 'cil-calendar' }
+        },
+        {
+          name: 'Catch Lessons',
+          url: '/student/catch-lessons',
+          iconComponent: { name: 'cib-myspace' }
         },
       ];
     }

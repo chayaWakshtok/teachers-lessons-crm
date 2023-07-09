@@ -5,6 +5,7 @@ import { Holiday } from '../models/holiday';
 import { Lesson } from '../models/lesson';
 import { map } from 'rxjs';
 import { catchLesson } from '../models/catch-lesson';
+import { ca } from 'date-fns/locale';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,16 @@ export class CatchLessonService {
 
   getAllByStudent(id: number) {
     return this.httpClient.get(`${environment.apiUrl}catchLesson/getAllByStudent?id=${id}`)
+      .pipe(
+      map((response: any) => response),
+      map((catchLessons:catchLesson[]) => {
+        catchLessons.forEach(catchLesson => {
+          catchLesson.dateFrom=new Date(catchLesson.dateFrom);
+          catchLesson.dateTo=new Date(catchLesson.dateTo);
+        });
+        return catchLessons;
+      })
+    );
   }
 
   // findById(id: number) {

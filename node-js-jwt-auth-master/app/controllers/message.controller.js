@@ -3,7 +3,7 @@ const config = require("../config/auth.config");
 const Message = db.message;
 const Op = db.Sequelize.Op;
 
-exports.getAllByTeacher = (req, res) => {
+exports.getAllTo = (req, res) => {
     var id = req.query.id;
 
     Message.findAll({
@@ -18,7 +18,34 @@ exports.getAllByTeacher = (req, res) => {
             }
         ],
         where: {
-            teacherId: id
+            toUser: id
+        },
+
+    })
+        .then(lessons => {
+            res.send(lessons);
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+        });
+};
+
+exports.getAllFrom = (req, res) => {
+    var id = req.query.id;
+
+    Message.findAll({
+        include: [
+            {
+                model: db.user,
+                as: "fromUser",
+            },
+            {
+                model: db.user,
+                as: "toUser",
+            }
+        ],
+        where: {
+            fromUser: id
         },
 
     })
@@ -34,24 +61,17 @@ exports.getAllByTeacher = (req, res) => {
 exports.findById = (req, res) => {
     var id = req.query.id;
 
-    Lesson.findByPk(id, {
+    Message.findByPk(id, {
         include: [
             {
-                model: db.specialty,
-                attributes: ["name", "id"],
-                as: "specialty",
+                model: db.user,
+                as: "fromUser",
             },
             {
-                model: db.series,
-                attributes: ["name", "id"],
-                as: "series",
-            },
-            {
-                model: db.subject,
-                attributes: ["name", "id"],
-                as: "subject",
-            },
-        ]
+                model: db.user,
+                as: "toUser",
+            }
+        ],
     })
         .then(lesson => {
             res.send(lesson);
@@ -65,9 +85,9 @@ exports.create = (req, res) => {
 
     var data = req.body;
 
-    Lesson.create(data)
+    Message.create(data)
         .then(user => {
-            res.send({ message: "Lesson add successfully!" });
+            res.send({ message: "Message add successfully!" });
         })
         .catch(err => {
             res.status(500).send({ message: err.message });
@@ -80,27 +100,50 @@ exports.update = async (req, res) => {
     var data = req.body;
     var id = req.body.id;
 
-    const lesson = await db.lesson.findByPk(id);
-    Object.assign(lesson, data);
+    const message = await db.message.findByPk(id);
+    Object.assign(message, data);
 
-    lesson.save(lesson)
+    message.save(message)
         .then(user => {
-            res.send({ message: "Lesson update successfully!" });
+            res.send({ message: "Message update successfully!" });
         })
         .catch(err => {
             res.status(500).send({ message: err.message });
         });
 };
 
+exports.updateAllReadByTo = async (req, res) => {
+    // Save User to Database
+    var id = req.query.id;
+
+    Message.update({ isRead: true }, { where: { toUser: id } }).then(num => {
+        if (num == 1) {
+            res.send({
+                message: "Message was updated successfully."
+            });
+        } else {
+            res.send({
+                message: `Cannot update Message with id=${id}. Maybe Message was not found or req.query is empty!`
+            });
+        }
+    })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Message with toUser = " + id
+            });
+        });
+
+};
+
 exports.delete = async (req, res) => {
     // Save User to Database
     var id = req.query.id;
 
-    const lesson = await db.lesson.findByPk(id);
+    const message = await db.message.findByPk(id);
 
-    lesson.destroy().then(p => {
+    message.destroy().then(p => {
 
-        res.send({ message: "Lesson delete successfully!" });
+        res.send({ message: "Message delete successfully!" });
 
     }).catch(err => {
         res.status(500).send({ message: err.message });

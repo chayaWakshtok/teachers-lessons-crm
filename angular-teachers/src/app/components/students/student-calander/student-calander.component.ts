@@ -19,10 +19,8 @@ export class StudentCalanderComponent {
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
-  modalData!: {
-    action: string;
-    event: CalendarEvent;
-  };
+  visible: boolean = false;
+  modalData!: catchLesson;
   refresh = new Subject<void>();
   activeDayIsOpen: boolean = false;
   events: CalendarEvent<catchLesson>[] = [];
@@ -59,9 +57,6 @@ export class StudentCalanderComponent {
     });
   }
 
-
-
-
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
@@ -76,28 +71,9 @@ export class StudentCalanderComponent {
     }
   }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
-
   handleEvent(action: string, event: CalendarEvent): void {
-    debugger;
-    this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'lg' });
+    this.toggleLiveDemo();
+    this.modalData =  event.meta;
   }
 
   setView(view: CalendarView) {
@@ -106,5 +82,14 @@ export class StudentCalanderComponent {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  handleLiveDemoChange(event: any) {
+    this.visible = event;
+  }
+
+  toggleLiveDemo(isSave: boolean = false) {
+
+    this.visible = !this.visible;
   }
 }

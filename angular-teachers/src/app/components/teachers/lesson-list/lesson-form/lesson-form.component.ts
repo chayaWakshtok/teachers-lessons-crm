@@ -24,7 +24,6 @@ export class LessonFormComponent implements OnInit {
   user: User | null | undefined;
   specialtyList: Specialty[] = [];
   subjectList: Subject[] = [];
-  seriesList: Series[] = [];
   loading: boolean = false;
   uploadedFiles: any;
 
@@ -32,7 +31,6 @@ export class LessonFormComponent implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private teacherService: TeachereService,
-    public seriesService: SeriesService,
     public subjectService: SubjectService,
     private alertService: AlertService,
     public lessonService: LessonService) {
@@ -54,7 +52,6 @@ export class LessonFormComponent implements OnInit {
       this.lessonService.findById(this.id).subscribe((res: any) => {
         this.lesson = res;
         this.chooseSubject();
-        this.chooseSpeciality();
       })
 
     }
@@ -69,15 +66,6 @@ export class LessonFormComponent implements OnInit {
     }
   }
 
-  chooseSpeciality() {
-    this.seriesService.getAllByTeacher(this.user?.teacher?.id).subscribe((res: any) => {
-      this.seriesList = res.filter((p: { specialtyId: number; }) => p.specialtyId == this.lesson.specialtyId);;
-    })
-    if (this.lesson.seriesId) {
-      if (!this.seriesList.find(p => p.id == this.lesson.seriesId))
-        this.lesson.seriesId = 0;
-    }
-  }
 
   submit() {
 

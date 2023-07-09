@@ -88,13 +88,13 @@
                               Specialty
                             </label>
                             <select [(ngModel)]="lesson.specialtyId" class="form-select custom-select"
-                              name="specialtyId" id="specialtyId" placeholder="specialty" (change)="chooseSpeciality()">
+                              name="specialtyId" id="specialtyId" placeholder="specialty">
                               <option value=0>Without</option>
                               <option *ngFor="let item of specialtyList" [value]="item.id">{{item.name}}</option>
                             </select>
                           </div>
 
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label for="topic">
                               Series
                             </label>
@@ -103,7 +103,7 @@
                               <option value=0>Without</option>
                               <option *ngFor="let item of seriesList" [value]="item.id">{{item.name}}</option>
                             </select>
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                     </div>

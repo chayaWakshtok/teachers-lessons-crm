@@ -73,7 +73,9 @@ import { DefaultHeaderComponent } from './components/default-header/default-head
 import { LessonShowComponent } from './components/students/lesson-show/lesson-show.component';
 import { ModalModule } from '@coreui/angular';
 import { StudentCalanderComponent } from './components/students/student-calander/student-calander.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StudentCatchLessonComponent } from './components/students/student-catch-lesson/student-catch-lesson.component';
+import { StudentSendMessageComponent } from './components/students/student-send-message/student-send-message.component';
+import { TooltipModule } from '@coreui/angular';
 
 
 
@@ -100,6 +102,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DefaultHeaderComponent,
     LessonShowComponent,
     StudentCalanderComponent,
+    StudentCatchLessonComponent,
+    StudentSendMessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -146,7 +150,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     coreDrop,
     ModalModule,
     btnCore,
-    NgbModule,
+    TooltipModule,
     CalendarModule.forRoot(
       {
         provide: DateAdapter,

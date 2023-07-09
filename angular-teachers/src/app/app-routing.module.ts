@@ -15,6 +15,7 @@ import { SerirsFormComponent } from './components/teachers/series-list/serirs-fo
 import { HomeStudentComponent } from './components/students/home-student/home-student.component';
 import { LessonShowComponent } from './components/students/lesson-show/lesson-show.component';
 import { StudentCalanderComponent } from './components/students/student-calander/student-calander.component';
+import { StudentCatchLessonComponent } from './components/students/student-catch-lesson/student-catch-lesson.component';
 
 const usersModule = () => import('./components/user/user.module').then(x => x.UserModule);
 
@@ -31,8 +32,8 @@ const routes: Routes = [
       { component: HolidayFormComponent, path: "holiday", data: { title: 'Holiday', } },
       { component: HoursListComponent, path: "hours", data: { title: 'Hours', } },
       { component: HourFormComponent, path: "hour", data: { title: 'Hour', } },
-      { component: SeriesListComponent, path: "series", data: { title: 'series', } },
-      { component: SerirsFormComponent, path: "serie", data: { title: 'serie', } },
+      // { component: SeriesListComponent, path: "series", data: { title: 'series', } },
+      // { component: SerirsFormComponent, path: "serie", data: { title: 'serie', } },
     ]
   },
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
       { component: HomeStudentComponent, path: "lessons", data: { title: 'Lessons', } },
       { component: LessonShowComponent, path: "lesson/:id", data: { title: 'Lesson', } },
       { component: StudentCalanderComponent, path: "calander", data: { title: 'Calander', } },
+      { component: StudentCatchLessonComponent, path: "catch-lessons", data: { title: 'Catch Lessons', }}
 
     ]
   },
