@@ -86,7 +86,7 @@ export class LessonFormComponent implements OnInit {
     }
     else {
       this.lesson.teacherId = this.user?.teacher?.id ?? 0;
-      this.lessonService.add(this.lesson, this.uploadedFiles[0]).subscribe((res: any) => {
+      this.lessonService.add(this.lesson, null).subscribe((res: any) => {
         this.alertService.success(res.message, { keepAfterRouteChange: true });
         this.loading = false;
         this.router.navigate(['teacher/lessons']);
