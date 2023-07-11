@@ -49,7 +49,7 @@
                     <td>{{item.lesson.durationHour}}</td>
                     <td>{{item.lesson.price}}</td>
                     <td>{{item.teacher.user?.firstName}} {{item.teacher.user?.lastName}}</td>
-                    <td>{{item.dateFrom>now?'true':"false"}}</td>
+                    <td>{{item.dateFrom < now?'true':"false"}}</td>
                     <td>
                       <a href="javascript:void(1)" cTooltip="Send Message" cTooltipPlacement="top"
                         style="margin-right: 10px;color: green;" (click)="sendMessage(item.id)"><svg cIcon
@@ -68,5 +68,3 @@
     </div>
   </div>
 </div>
-
-
