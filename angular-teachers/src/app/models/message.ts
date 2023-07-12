@@ -2,6 +2,8 @@ import { User } from "./user";
 
 export class Message {
   id!: number;
+  title!: string;
+  stars!: number;
   message!: string;
   isRead: boolean = false;
   isActive: boolean = true;

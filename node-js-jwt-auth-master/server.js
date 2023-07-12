@@ -50,6 +50,8 @@ require('./app/routes/hour.routes')(app);
 require('./app/routes/catchLesson.routes')(app);
 require('./app/routes/speciality.routes')(app);
 require('./app/routes/student.routes')(app);
+require('./app/routes/remark.routes')(app);
+require('./app/routes/message.routes')(app);
 
 app.use(errorHandler);
 

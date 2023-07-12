@@ -52,13 +52,13 @@
                     <td>{{item.dateFrom < now?'true':"false"}}</td>
                     <td>
                       <a href="javascript:void(1)" cTooltip="Send Message" cTooltipPlacement="top"
-                        style="margin-right: 10px;color: green;" (click)="sendMessage(item.id)"><svg cIcon
+                        style="margin-right: 10px;color: green;" (click)="toggleLiveDemo(item.id)"><svg cIcon
                           name="cil-paper-plane" title="cil-paper-plane" size="1lg"></svg></a>
                       <a href="javascript:void(1)" *ngIf="item.dateFrom>dayBefore" (click)="delete(item.id)"
                         cTooltip="Delete" cTooltipPlacement="top" style="color: red;"><svg cIcon name="cil-x-circle"
                           title="cil-x-circle" size="1lg"></svg></a>
-                      <a href="javascript:void(1)" *ngIf="item.dateFrom<now" (click)="delete(item.id)"
-                        cTooltip="Remark" cTooltipPlacement="top" style="color: orange;"><svg cIcon name="cil-comment-bubble"
+                      <a href="javascript:void(1)" *ngIf="item.dateFrom<now" (click)="delete(item.id)" cTooltip="Remark"
+                        cTooltipPlacement="top" style="color: orange;"><svg cIcon name="cil-comment-bubble"
                           title="cil-x-circle" size="1lg"></svg></a>
                     </td>
                   </tr>
@@ -71,3 +71,28 @@
     </div>
   </div>
 </div>
+
+
+<c-modal id="liveDemoModal" [visible]="visible">
+  <c-modal-header>
+    <h5 cModalTitle>Send Message</h5>
+    <button (click)="closeModalSend()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form>
+      <input type="text" [(ngModel)]="messageSend.title" name="title" class="form-control" placeholder="Title">
+      <textarea [(ngModel)]="messageSend.message" name="messa" class="form-control" rows="5"
+        placeholder="Message"></textarea>
+      <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block">
+        <li (click)="countStar(star)" [ngClass]="{'selected': (star <= messageSend.stars)}">
+          <i class="fa fa-star"></i>
+        </li>
+      </ul>
+
+
+    </form>
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="primary" (click)="sendMessage()">Send</button>
+  </c-modal-footer>
+</c-modal>

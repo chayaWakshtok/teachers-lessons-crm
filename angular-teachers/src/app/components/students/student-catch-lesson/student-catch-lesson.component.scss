@@ -2,6 +2,10 @@
 // card.scss
 //
 
+.rating-list li.selected {
+  color: #ffd700;
+}
+
 .card {
   border: none;
   box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
