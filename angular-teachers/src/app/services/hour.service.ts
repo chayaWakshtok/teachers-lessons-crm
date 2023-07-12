@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Holiday } from '../models/holiday';
 import { Lesson } from '../models/lesson';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Hour } from '../models/hour';
 
 @Injectable({
@@ -21,8 +21,8 @@ export class HourService {
     return this.httpClient.put(`${environment.apiUrl}hour/update`, { ...hour })
   }
 
-  getAllByTeacher(id: number) {
-    return this.httpClient.get(`${environment.apiUrl}hour/getAllByTeacher?id=${id}`)
+  getAllByTeacher(id: number):Observable<Hour[]> {
+    return this.httpClient.get<Hour[]>(`${environment.apiUrl}hour/getAllByTeacher?id=${id}`)
   }
 
   findById(id: number) {

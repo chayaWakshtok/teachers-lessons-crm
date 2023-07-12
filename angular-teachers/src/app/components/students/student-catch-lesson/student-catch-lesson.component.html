@@ -57,6 +57,9 @@
                       <a href="javascript:void(1)" *ngIf="item.dateFrom>dayBefore" (click)="delete(item.id)"
                         cTooltip="Delete" cTooltipPlacement="top" style="color: red;"><svg cIcon name="cil-x-circle"
                           title="cil-x-circle" size="1lg"></svg></a>
+                      <a href="javascript:void(1)" *ngIf="item.dateFrom<now" (click)="delete(item.id)"
+                        cTooltip="Remark" cTooltipPlacement="top" style="color: orange;"><svg cIcon name="cil-comment-bubble"
+                          title="cil-x-circle" size="1lg"></svg></a>
                     </td>
                   </tr>
                 </tbody>

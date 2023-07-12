@@ -12,6 +12,9 @@ import * as moment from 'moment';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
+import { HourService } from 'src/app/services/hour.service';
+import { forkJoin } from 'rxjs';
+import { Hour } from 'src/app/models/hour';
 
 
 @Component({
@@ -30,6 +33,7 @@ export class LessonShowComponent {
   hoursChoose: any[] = [];
   chooseTime: any = null;
   user: User | null | undefined;
+  hoursTeacher: Hour[] = [];
 
   constructor(public lessonService: LessonService,
     private route: ActivatedRoute,
@@ -37,6 +41,7 @@ export class LessonShowComponent {
     public catchLessonService: CatchLessonService,
     public accountService: AccountService,
     private alertService: AlertService,
+    public hourService: HourService,
     public router: Router
   ) {
 
@@ -44,13 +49,16 @@ export class LessonShowComponent {
 
   fillHours() {
 
+    //hour and minutes
     var hours = Math.floor(this.lesson.durationHour / 60);
     var minutes = this.lesson.durationHour % 60;
+    this.hoursChoose = [];
 
+    for (let hour = 0; hour <= 23; hour++) {
 
-    for (let hour = 8; hour <= 23; hour++) {
-
+      //flag to hour
       var d = 0;
+      //flag to half hour
       var d1 = 0;
 
       this.catchLessonsTeacher.forEach(x => {
@@ -79,6 +87,16 @@ export class LessonShowComponent {
 
         }
       });
+      this.hoursTeacher.filter(p => p.isActive == true && p.day == this.catchLesson.dateFrom.getDay() + 1).forEach(x => {
+        var timeArr = x.fromHour.split(":");
+        var timeArr2 = x.tillHour.split(":");
+        if (hour < Number(timeArr[0]) || hour > Number(timeArr2[0]) - hours) {
+          d = 1;
+          d1 = 1;
+        }
+      });
+
+
       if (d != 1) {
         this.hoursChoose.push(moment({ hour }).format('H:mm'));
         if (d1 != 1)
@@ -101,14 +119,23 @@ export class LessonShowComponent {
         this.catchLessonsTeacher = res;
       });
 
-      this.holidayService.getAllByTeacher(this.lesson.teacherId).subscribe((res: any) => {
-        this.holidays = res;
+
+      forkJoin([this.holidayService.getAllByTeacher(this.lesson.teacherId), this.hourService.getAllByTeacher(this.lesson.teacherId)]).subscribe(p => {
+        this.holidays = p[0];
+        this.hoursTeacher = p[1];
 
         var date = new Date();
         var dateTill = new Date();
+
         dateTill.setDate(date.getDate() + 30);
+
         while (date <= dateTill) {
+          date.setDate(date.getDate() + 1);
+
           var result = [];
+          var findDay = true;
+
+          //check if date is holiday
           this.holidays.filter(x => x.allDay == true && x.isActive == true).forEach(element => {
             var dateE = new Date(element.date).setHours(0, 0, 0, 0);
             var dateToE = new Date(element.toDate).setHours(0, 0, 0, 0);
@@ -117,12 +144,16 @@ export class LessonShowComponent {
             }
           });
 
-          if (result.length == 0)
+          //find day that teacher work
+          var find = this.hoursTeacher.filter(p => p.isActive == true && p.day == date.getDay() + 1);
+          if (find.length == 0)
+            findDay = false;
+
+
+          if (result.length == 0 && findDay)
             this.dateSelect.push(new Date(date));
-          date.setDate(date.getDate() + 1);
         }
-      }
-      );
+      });
     });
   }
 

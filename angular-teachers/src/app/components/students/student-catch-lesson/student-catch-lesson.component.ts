@@ -14,7 +14,7 @@ export class StudentCatchLessonComponent implements OnInit {
   user: User | null | undefined;
   catchLessons: catchLesson[] = [];
   now = new Date();
-  dayBefore = new Date(new Date().setDate(this.now.getDate() - 1));
+  dayBefore = new Date(new Date().setDate(this.now.getDate() + 1));
 
 
 

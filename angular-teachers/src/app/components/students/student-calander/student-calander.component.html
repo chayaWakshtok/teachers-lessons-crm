@@ -38,11 +38,10 @@
     (eventClicked)="handleEvent('Clicked', $event.event)">
   </mwl-calendar-month-view>
   <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-    [hourDuration]="45" [hourSegments]="2" [dayStartHour]="7" [dayEndHour]="24"
     (eventClicked)="handleEvent('Clicked', $event.event)">
   </mwl-calendar-week-view>
   <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-    [dayStartHour]="7" [dayEndHour]="24" (eventClicked)="handleEvent('Clicked', $event.event)">
+     (eventClicked)="handleEvent('Clicked', $event.event)">
   </mwl-calendar-day-view>
 </div>
 
@@ -52,16 +51,20 @@
     <button (click)="toggleLiveDemo()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <b>Lesson Title:</b> {{ modalData.lesson.title }} <br />
-    <b>Lesson Description: </b> {{ modalData.lesson.description }} <br />
-    <b> Lesson Level:</b> {{ modalData.lesson.level }} <br />
-    <b>Lesson Price:</b> {{ modalData.lesson.price }} <br />
-    <b> Lesson Date:</b> {{ modalData.dateFrom | date:'dd/MM/yyyy hh:mm' }} <br />
-    <b>Lesson Duration:</b> {{ modalData.lesson.durationHour }} Minutes<br />
-    <b>Lesson Teacher:</b> {{ modalData.teacher.user?.firstName }} {{ modalData.teacher.user?.lastName }}<br />
+    <b> Title:</b> {{ modalData.lesson.title }} <br />
+    <b> Description: </b> {{ modalData.lesson.description }} <br />
+    <b> Level:</b> {{(modalData.lesson.level)>=0&&(modalData.lesson.level)
+    <4?'Beginner': (modalData.lesson.level)>=4&&(modalData.lesson.level)
+      <8?'Advanced':'Intermediate'}} <br />
+      <b> Price:</b> {{ modalData.lesson.price }} <br />
+      <b> Date:</b> {{ modalData.dateFrom | date:'dd/MM/yyyy hh:mm' }} <br />
+      <b> Duration:</b> {{ modalData.lesson.durationHour }} Minutes<br />
+      <b> Teacher:</b> {{ modalData.teacher.user?.firstName }} {{ modalData.teacher.user?.lastName }}<br />
 
   </c-modal-body>
+
   <c-modal-footer>
+    <button cButton (click)="toggleLiveDemo(true)" color="primary">Send Message</button>
     <button cButton (click)="toggleLiveDemo(true)" color="primary">Ok</button>
   </c-modal-footer>
 </c-modal>

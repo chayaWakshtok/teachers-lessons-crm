@@ -57,7 +57,10 @@ export class AppComponent {
 
   constructor(private accountService: AccountService,
     public iconSet: IconSetService) {
-    this.accountService.user.subscribe(x => { this.user = x; });
+    this.accountService.user.subscribe(x => {
+      this.user = x;
+      this.ngOnInit();
+    });
     iconSet.icons = { ...freeSet, ...brandSet, ...flagSet };
   }
 

@@ -11,7 +11,7 @@ module.exports = function (app) {
     });
 
     app.post("/api/hour/create", [authJwt.verifyToken, authJwt.isTeacher], controller.create);
-    app.get("/api/hour/getAllByTeacher", [authJwt.verifyToken, authJwt.isTeacher], controller.getAllByTeacher);
+    app.get("/api/hour/getAllByTeacher", [authJwt.verifyToken], controller.getAllByTeacher);
     app.get("/api/hour/findById", [authJwt.verifyToken, authJwt.isTeacher], controller.findById);
     app.get("/api/hour/delete", [authJwt.verifyToken, authJwt.isTeacher], controller.delete);
 
