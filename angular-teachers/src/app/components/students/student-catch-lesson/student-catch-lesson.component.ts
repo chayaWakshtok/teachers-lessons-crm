@@ -38,6 +38,11 @@ export class StudentCatchLessonComponent implements OnInit {
   }
 
   delete(id: number) {
+    this.catchLessonService.delete(id).subscribe((res: any) => {
+      this.catchLessons = this.catchLessons.filter(x => x.id != id);
+      this.cdRef.detectChanges();
+    }
+    )
 
   }
 
