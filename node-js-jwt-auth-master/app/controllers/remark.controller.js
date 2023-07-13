@@ -3,7 +3,7 @@ const config = require("../config/auth.config");
 const Remark = db.remark;
 const Op = db.Sequelize.Op;
 
-exports.getAllByLessen= (req, res) => {
+exports.getAllByLessen = (req, res) => {
     var id = req.query.id;
 
     Remark.findAll({
@@ -21,6 +21,32 @@ exports.getAllByLessen= (req, res) => {
         ],
         where: {
             'catchLesson.lesson.id': id
+        },
+
+    })
+        .then(lessons => {
+            res.send(lessons);
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+        });
+};
+
+exports.getAllByStudent = (req, res) => {
+    var id = req.query.id;
+
+    Remark.findAll({
+        include: [
+            {
+                model: db.catchLesson,
+                as: "catchLesson",
+                include: [{
+                    model: db.lesson, as: "lesson", include: [{ model: db.teacher, as: "teacher", include: [{ model: db.user, as: "user" }] }]
+                }]
+            }
+        ],
+        where: {
+            studentId: id
         },
 
     })

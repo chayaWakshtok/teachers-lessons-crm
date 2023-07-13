@@ -2,12 +2,11 @@ import { User } from "./user";
 
 export class Message {
   id!: number;
-  title!: string;
-  stars!: number;
   message!: string;
   isRead: boolean = false;
   isActive: boolean = true;
   userId!: number;
+  type: number = 1;
   user: User | undefined;
   fromUserId!: number;
   fromUser: User | undefined;

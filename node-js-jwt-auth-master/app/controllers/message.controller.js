@@ -87,7 +87,7 @@ exports.create = (req, res) => {
 
     Message.create(data)
         .then(user => {
-            res.send({ message: "Message add successfully!" });
+            res.send({ message: "Message Send successfully!" });
         })
         .catch(err => {
             res.status(500).send({ message: err.message });

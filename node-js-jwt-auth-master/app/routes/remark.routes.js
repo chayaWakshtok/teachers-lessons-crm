@@ -11,7 +11,8 @@ module.exports = function (app) {
         next();
     });
 
-    app.post("/api/message/create", [authJwt.verifyToken], controller.create);
-    app.get("/api/message/getAllByLesson", [authJwt.verifyToken], controller.getAllByLessen);
+    app.post("/api/remark/create", [authJwt.verifyToken], controller.create);
+    app.get("/api/remark/getAllByLesson", [authJwt.verifyToken], controller.getAllByLessen);
+    app.get("/api/remark/getAllByStudent", [authJwt.verifyToken], controller.getAllByStudent);
 
 };
