@@ -67,11 +67,11 @@ export class AppComponent {
   ngOnInit(): void {
     if (this.user?.roleId == 2) {
       this.navItems = [
-        {
-          name: 'Dashboard',
-          url: '/dashboard',
-          iconComponent: { name: 'cil-speedometer' },
-        },
+        // {
+        //   name: 'Dashboard',
+        //   url: '/dashboard',
+        //   iconComponent: { name: 'cil-speedometer' },
+        // },
         // {
         //   name: 'Series',
         //   url: '/teacher/series',

@@ -127,7 +127,10 @@ exports.findById = (req, res) => {
             {
                 model: db.catchLesson,
                 as: "catchLessons",
-                include: [{ model: db.remark, as: "remarks" }]
+                include: [{
+                    model: db.remark, as: "remarks",
+                    include: [{ model: db.student, as: "student", include: [{ model: db.user, as: "user" }] }]
+                }]
             },
         ]
     })

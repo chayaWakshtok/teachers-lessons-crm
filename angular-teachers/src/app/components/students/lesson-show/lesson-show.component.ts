@@ -15,6 +15,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { HourService } from 'src/app/services/hour.service';
 import { forkJoin } from 'rxjs';
 import { Hour } from 'src/app/models/hour';
+import { Remark } from 'src/app/models/remark';
 
 
 @Component({
@@ -34,6 +35,8 @@ export class LessonShowComponent {
   chooseTime: any = null;
   user: User | null | undefined;
   hoursTeacher: Hour[] = [];
+  reviewByCount: number[] = [0, 0, 0, 0, 0];
+  reviews: Remark[] = [];
 
   constructor(public lessonService: LessonService,
     private route: ActivatedRoute,
@@ -115,8 +118,16 @@ export class LessonShowComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.lessonService.findById(this.id).subscribe((res: any) => {
       this.lesson = res;
+      console.log(this.lesson);
+      this.lesson.catchLessons.forEach(x => {
+        x.remarks.forEach(y => {
+          this.reviews.push(y);
+          this.reviewByCount[y.stars - 1]++;
+        });
+      });
       this.catchLessonService.getAllByTeacher(this.lesson.teacherId).subscribe((res: any) => {
         this.catchLessonsTeacher = res;
+        console.log(this.catchLessonsTeacher);
       });
 
 

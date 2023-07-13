@@ -54,32 +54,6 @@
       </div>
 
 
-      <div class="about-instructor-box">
-        <div class="about-instructor-title">
-          Catch Lesson </div>
-        <div class="row">
-          <div class="col-md-8 py-0 px-3 text-md-start">
-            <p class="fw-500 text-14px w-100"></p>
-            <div class="rating row">
-              <div class="col-6">
-                <select class="form-control" aria-label="Date Lesson" [(ngModel)]="catchLesson.dateFrom"
-                  (change)="chooseDate()">
-                  <option [value]="null">Choose Date</option>
-                  <option *ngFor="let dates of dateSelect" [value]="dates">
-                    {{dates | date:'dd/MM/yyyy'}}
-                </select>
-              </div>
-              <div class="col-6">
-                <select class="form-control" aria-label="Date Lesson" [(ngModel)]="chooseTime">
-                  <option [value]="null">Choose Time</option>
-                  <option *ngFor="let hour of hoursChoose">{{hour}}</option>
-                </select>
-              </div>
-            </div>
-            <span class="badge badge-sub-warning text-12px my-1 py-2"></span>
-          </div>
-        </div>
-      </div>
 
 
 
@@ -116,7 +90,7 @@
           </div>
         </div>
       </div> -->
-      <!--
+
       <div class="student-feedback-box mt-5 pb-3">
         <div class="student-feedback-title">
           Student feedback </div>
@@ -124,15 +98,15 @@
           <div class="col-md-12">
             <div class="average-rating ms-auto me-auto float-md-start mb-sm-4">
               <div class="num">
-                0 </div>
+                {{lesson.stars}} </div>
               <div class="rating">
-                <i class="fas fa-star" style="color: #abb0bb;"></i>
-                <i class="fas fa-star" style="color: #abb0bb;"></i>
-                <i class="fas fa-star" style="color: #abb0bb;"></i>
-                <i class="fas fa-star" style="color: #abb0bb;"></i>
-                <i class="fas fa-star" style="color: #abb0bb;"></i>
+                <i class="fas fa-star" style="color: #abb0bb;" [ngClass]="{'filled': lesson.stars>=1}"></i>
+                <i class="fas fa-star" style="color: #abb0bb;" [ngClass]="{'filled': lesson.stars>=2}"></i>
+                <i class="fas fa-star" style="color: #abb0bb;" [ngClass]="{'filled': lesson.stars>=3}"></i>
+                <i class="fas fa-star" style="color: #abb0bb;" [ngClass]="{'filled': lesson.stars>=4}"></i>
+                <i class="fas fa-star" style="color: #abb0bb;" [ngClass]="{'filled': lesson.stars>=5}"></i>
               </div>
-              <div class="title text-15px fw-700">0 Reviews</div>
+              <div class="title text-15px fw-700">{{lesson.sumRemark}} Reviews</div>
             </div>
             <div class="individual-rating">
               <ul>
@@ -151,7 +125,7 @@
                     <div class="progress-bar" style="width: 0%"></div>
                   </div>
                   <span class="d-inline-block ps-2 text-15px fw-500">
-                    (0)
+                    ({{reviewByCount[0]}})
                   </span>
                 </li>
                 <li>
@@ -169,7 +143,8 @@
                     <div class="progress-bar" style="width: 0%"></div>
                   </div>
                   <span class="d-inline-block ps-2 text-15px fw-500">
-                    (0)
+                    ({{reviewByCount[1]}})
+
                   </span>
                 </li>
                 <li>
@@ -187,7 +162,8 @@
                     <div class="progress-bar" style="width: 0%"></div>
                   </div>
                   <span class="d-inline-block ps-2 text-15px fw-500">
-                    (0)
+                    ({{reviewByCount[2]}})
+
                   </span>
                 </li>
                 <li>
@@ -205,7 +181,8 @@
                     <div class="progress-bar" style="width: 0%"></div>
                   </div>
                   <span class="d-inline-block ps-2 text-15px fw-500">
-                    (0)
+                    ({{reviewByCount[3]}})
+
                   </span>
                 </li>
                 <li>
@@ -223,7 +200,8 @@
                     <div class="progress-bar" style="width: 0%"></div>
                   </div>
                   <span class="d-inline-block ps-2 text-15px fw-500">
-                    (0)
+                    ({{reviewByCount[4]}})
+
                   </span>
                 </li>
               </ul>
@@ -234,23 +212,77 @@
         <div class="reviews mt-5">
           <h3>Reviews</h3>
           <ul>
+            <li *ngFor="let item of reviews">
+              <div class="row">
+                <div class="col-auto">
+                  <div class="review-time">
+                    <div class="reviewer-name fw-500">
+                      {{item.student?.user?.firstName}}  {{item.student?.user?.lastName}}</div>
+                  </div>
+                  <div class="review-details">
+                    <div class="rating">
+                      <i class="fas fa-star" [ngClass]="{'filled': item.stars>=1}"></i>
+                      <i class="fas fa-star " [ngClass]="{'filled': item.stars>=2}"></i>
+                      <i class="fas fa-star " [ngClass]="{'filled': item.stars>=3}"></i>
+                      <i class="fas fa-star " [ngClass]="{'filled': item.stars>=4}"></i>
+                      <i class="fas fa-star" [ngClass]="{'filled': item.stars>=5}"></i>
+                    </div>
+                    <div class="review-text text-13px">
+                     {{item.title}} </div>
+                  </div>
+                </div>
+              </div>
+            </li>
           </ul>
         </div>
-      </div> -->
+      </div>
     </div>
 
     <div class="col-lg-4 order-first order-lg-last" style="padding-right: 0px;">
       <div class="course-sidebar box-shadow-5" style="top: auto;">
 
+
+
+
         <div class="course-sidebar-text-box">
-          <div class="price text-center">
-            <span class="current-price"><span class="current-price">${{lesson.price}}</span></span>
-            <input type="hidden" id="total_price_of_checking_out" value="$524">
+
+          <div class="about-instructor-box">
+            <div class="about-instructor-title">
+              Catch Lesson </div>
+            <div class="row">
+              <div >
+                <p class="fw-500 text-14px w-100"></p>
+                <div class="rating row">
+                  <div class="col-6">
+                    <select class="form-control" aria-label="Date Lesson" [(ngModel)]="catchLesson.dateFrom"
+                      (change)="chooseDate()">
+                      <option [value]="null">Choose Date</option>
+                      <option *ngFor="let dates of dateSelect" [value]="dates">
+                        {{dates | date:'dd/MM/yyyy'}}
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <select class="form-control" aria-label="Date Lesson" [(ngModel)]="chooseTime">
+                      <option [value]="null">Choose Time</option>
+                      <option *ngFor="let hour of hoursChoose">{{hour}}</option>
+                    </select>
+                  </div>
+                </div>
+                <span class="badge badge-sub-warning text-12px my-1 py-2"></span>
+              </div>
+            </div>
           </div>
 
           <div class="buy-btns">
             <button class="btn btn-buy-now" type="button" id="30" (click)="submit()">Catch lesson</button>
           </div>
+
+
+          <div class="price text-center">
+            <span class="current-price"><span class="current-price"> ${{lesson.price}}</span></span>
+            <input type="hidden" id="total_price_of_checking_out" value="$524">
+          </div>
+
 
 
           <div class="includes">

@@ -18,7 +18,7 @@ exports.getAllTo = (req, res) => {
             }
         ],
         where: {
-            toUser: id
+            toUserId: id
         },
 
     })

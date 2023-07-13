@@ -2344,8 +2344,8 @@ course content
   color: #dedfe0;
 }
 
-.student-feedback-box .individual-rating .rating i.filled {
-  color: #f4c150;
+.filled {
+  color: #f4c150 !important;
 }
 
 .student-feedback-box .individual-rating li > div:not(.progress) {

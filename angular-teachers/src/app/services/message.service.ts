@@ -22,11 +22,11 @@ export class MessagesService {
     }
 
     getAllFrom(id: number) {
-        return this.httpClient.get(`${environment.apiUrl}message/getAllFrom?id=${id}`);
+        return this.httpClient.get(`${environment.apiUrl}message/getAllByFrom?id=${id}`);
     }
 
     getAllTo(id: number) {
-        return this.httpClient.get(`${environment.apiUrl}message/getAllTo?id=${id}`);
+        return this.httpClient.get(`${environment.apiUrl}message/getAllByTo?id=${id}`);
     }
 
 
