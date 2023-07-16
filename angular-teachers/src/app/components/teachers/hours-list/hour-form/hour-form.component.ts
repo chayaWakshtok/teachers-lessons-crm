@@ -20,7 +20,7 @@ export class HourFormComponent {
   id!: number;
   user: User | null | undefined;
   loading: boolean = false;
-  daysList:string[]=['Sunday','Monday','Tuersday'];
+  daysList:string[]=['Sunday','Monday','Tuesday', 'Wednesday','Thursday','Friday', 'Saturday'];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
