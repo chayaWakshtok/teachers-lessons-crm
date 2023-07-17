@@ -60,7 +60,8 @@
                   <tr *ngFor="let item of lessons">
                     <td>{{item.id}}</td>
                     <td>{{item.title}}</td>
-                    <td>{{item.level}}</td>
+                    <td>{{(item.level)>=0&&(item.level)
+                      <4?'Beginner': (item.level)>=4&&(item.level)<8?'Advanced':'Intermediate'}}</td>
                     <td>{{item.price}}</td>
                     <td>{{item.durationHour}}</td>
                     <td>{{item.subject.name}}</td>

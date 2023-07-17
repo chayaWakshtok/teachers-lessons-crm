@@ -93,6 +93,7 @@ export class CalanderComponent implements OnInit {
 
       this.holidayService.getAllByTeacher(this.user?.teacher?.id ?? 0).subscribe((res: any) => {
         this.holidays = res;
+        this.holidays= this.holidays.filter(p=>p.isActive==true);
         this.holidays.forEach(h => {
           this.events.push({ start: new Date(h.date), title: h.title, allDay: h.allDay, end: new Date(h.toDate), color: colors['yellow'], meta: h })
         })

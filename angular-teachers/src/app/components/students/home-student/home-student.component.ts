@@ -42,7 +42,9 @@ export class HomeStudentComponent implements OnInit {
   }
 
   filter() {
+
     this.lessonsSearch = this.lessons;
+
     if (this.subjectId != 0) {
       this.lessonsSearch = this.lessonsSearch.filter(x => x.subjectId == this.subjectId);
     }

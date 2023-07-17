@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="row">
         <div class="col-xl-12">
           <div class="card">
@@ -42,7 +42,7 @@
                   <tbody *ngIf="hours&&hours.length>0">
                     <tr *ngFor="let item of hours">
                       <td>{{item.id}}</td>
-                      <td>{{item.day}}</td>
+                      <td>{{days[item.day]}}</td>
                       <td>{{item.fromHour}}</td>
                       <td>{{item.tillHour}}</td>
                       <td>{{item.isActive}}</td>
@@ -60,4 +60,3 @@
       </div>
     </div>
   </div>
-  

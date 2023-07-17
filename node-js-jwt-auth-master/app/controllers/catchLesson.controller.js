@@ -52,6 +52,11 @@ exports.getAllByStudent = (req, res) => {
                 model: db.lesson,
                 // attributes: ["name", "id"],
                 as: "lesson",
+            },
+            {
+                model: db.remark,
+                // attributes: ["name", "id"],
+                as: "remarks",
             }
         ],
 

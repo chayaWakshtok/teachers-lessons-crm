@@ -43,8 +43,12 @@
                             <label for="topic">
                               Level <span class="required">*</span>
                             </label>
-                            <input type="number" name="level" id="level" class="form-control" placeholder="level"
-                              [(ngModel)]="lesson.level" required>
+                            <select [(ngModel)]="lesson.level" class="form-select custom-select" name="level"
+                              id="subjectId" placeholder="level">
+                              <option value="1">Beginner</option>
+                              <option value="5">Advanced</option>
+                              <option value="9">Intermediate</option>
+                            </select>
                           </div>
 
                           <div class="form-group">
@@ -67,7 +71,7 @@
                             <label for="topic">
                               Duration (minutes) <span class="required">*</span>
                             </label>
-                            <input type="number" name="durationHour" step="1" id="durationHour"
+                            <input type="number" name="durationHour" step="1" id="durationHour" min="0" max="4"
                               [(ngModel)]="lesson.durationHour" class="form-control" placeholder="duration (minutes)"
                               required>
                           </div>
@@ -75,6 +79,7 @@
                           <div class="form-group">
                             <label for="topic">
                               Subject <span class="required">*</span>
+                              <a style="margin-left: 20px; color: #727cf5;" href="javascrit:void(1)">Add Subject</a>
                             </label>
                             <select [(ngModel)]="lesson.subjectId" class="form-select custom-select" name="subjectId"
                               id="subjectId" placeholder="subject" (change)="chooseSubject()">
@@ -86,6 +91,7 @@
                           <div class="form-group">
                             <label for="topic">
                               Specialty
+                              <a style="margin-left: 20px; color: #727cf5;" href="javascrit:void(1)">Add Specialty</a>
                             </label>
                             <select [(ngModel)]="lesson.specialtyId" class="form-select custom-select"
                               name="specialtyId" id="specialtyId" placeholder="specialty">

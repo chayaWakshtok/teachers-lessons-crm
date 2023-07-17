@@ -20,15 +20,6 @@ exports.getAll = (req, res) => {
             ],
         ],
 
-        // attributes: {
-        //     include: [ 'id', 'name',
-        //     [Sequelize.literal("(SELECT COUNT(*) from members as m where m.account_id=account.id)", "usersCount"],
-        //     [Sequelize.literal("(SELECT COUNT(*) from groups as g where g.account_id=account.id)", "groupsCount"],
-        //     [Sequelize.literal("(SELECT COUNT(*) from roles as r where r.account_id=account.id)", "rolesCount"],
-        //     ]
-        //    ,
-        //     // [Sequelize.fn('count', Sequelize.col('lessons.id')), 'lessonCount'] // <---- Here you will get the total count of user
-        // },
         include: [
             {
                 model: db.specialty,
@@ -61,3 +52,17 @@ exports.getAll = (req, res) => {
             res.status(500).send({ message: err.message });
         });
 };
+
+exports.create = (req, res) => {
+
+    var data = req.body;
+
+    Subject.create(data)
+        .then(user => {
+            res.send({ message: "Subject add successfully!" });
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+        });
+};
+

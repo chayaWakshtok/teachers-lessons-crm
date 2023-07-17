@@ -11,5 +11,5 @@ module.exports = function (app) {
     });
 
     app.get("/api/speciality/getAll", [], controller.getAll);
-
+    app.post("/api/speciality/create", [authJwt.verifyToken, authJwt.isTeacher], controller.create);
 };

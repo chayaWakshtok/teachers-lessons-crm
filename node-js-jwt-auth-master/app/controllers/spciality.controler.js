@@ -20,3 +20,16 @@ exports.getAll = (req, res) => {
             res.status(500).send({ message: err.message });
         });
 };
+
+exports.create = (req, res) => {
+
+    var data = req.body;
+
+    Specialty.create(data)
+        .then(user => {
+            res.send({ message: "Specialty add successfully!" });
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+        });
+};

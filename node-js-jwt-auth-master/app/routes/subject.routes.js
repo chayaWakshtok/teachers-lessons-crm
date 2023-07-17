@@ -11,5 +11,6 @@ module.exports = function (app) {
     });
 
     app.get("/api/subject/getAll", [], controller.getAll);
+    app.post("/api/subject/create", [authJwt.verifyToken, authJwt.isTeacher], controller.create);
 
 };

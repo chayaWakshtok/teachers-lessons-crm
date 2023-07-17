@@ -49,7 +49,7 @@
                     <td>{{item.lesson.durationHour}}</td>
                     <td>{{item.lesson.price}}</td>
                     <td>{{item.teacher.user?.firstName}} {{item.teacher.user?.lastName}}</td>
-                    <td>{{item.dateFrom < now?'true':"false"}}</td>
+                    <td>{{item.dateFrom < now?'v':"x"}}</td>
                     <td>
                       <a href="javascript:void(1)" cTooltip="Send Message" cTooltipPlacement="top"
                         style="margin-right: 10px;color: green;" (click)="toggleLiveDemo(item.id)"><svg cIcon
@@ -57,9 +57,10 @@
                       <a href="javascript:void(1)" *ngIf="item.dateFrom>dayBefore" (click)="delete(item.id)"
                         cTooltip="Delete" cTooltipPlacement="top" style="color: red;"><svg cIcon name="cil-x-circle"
                           title="cil-x-circle" size="1lg"></svg></a>
-                      <a href="javascript:void(1)" *ngIf="item.dateFrom<now" (click)="toggleLiveDemoRemark(item.id)"
-                        cTooltip="Remark" cTooltipPlacement="top" style="color: orange;"><svg cIcon
-                          name="cil-comment-bubble" title="cil-x-circle" size="1lg"></svg></a>
+                      <a href="javascript:void(1)" *ngIf="item.dateFrom<now &&item.remarks.length==0"
+                        (click)="toggleLiveDemoRemark(item.id)" cTooltip="Remark" cTooltipPlacement="top"
+                        style="color: orange;"><svg cIcon name="cil-comment-bubble" title="cil-x-circle"
+                          size="1lg"></svg></a>
                     </td>
                   </tr>
                 </tbody>
@@ -101,8 +102,8 @@
         <label for="topic">
           Remark <span class="required">*</span>
         </label>
-        <input type="text" name="title" id="title" class="form-control" placeholder="remark"
-          [(ngModel)]="remark.title" required>
+        <input type="text" name="title" id="title" class="form-control" placeholder="remark" [(ngModel)]="remark.title"
+          required>
       </div>
       <div class="form-group">
         <label for="topic">

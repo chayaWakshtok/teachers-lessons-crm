@@ -44,6 +44,9 @@
                     <td>{{item.fromUser?.firstName}} {{item.fromUser?.lastName}}</td>
                     <td>{{item.createdAt|date:'dd/MM/yyyy hh:mm'}}</td>
                     <td>
+                      <a href="javascript:void(1)" cTooltip="Return Message" cTooltipPlacement="top"
+                        style="margin-right: 10px;color: blue;" (click)="toggleLiveDemo(item)"><svg cIcon
+                          name="cil-paper-plane" title="cil-paper-plane" size="1lg"></svg></a>
                       <a href="javascript:void(1)" cTooltip="Update Read" cTooltipPlacement="top" *ngIf="!item.isRead"
                         style="margin-right: 10px;color: green;" (click)="updateRead(item)"><svg cIcon
                           name="cil-paper-plane" title="cil-paper-plane" size="1lg"></svg></a>
@@ -60,3 +63,20 @@
     </div>
   </div>
 </div>
+
+
+<c-modal id="liveDemoModal2" [visible]="visible">
+  <c-modal-header>
+    <h5 cModalTitle>Send Message</h5>
+    <button (click)="closeModalSend()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form>
+      <textarea [(ngModel)]="messageSend.message" name="messa" class="form-control" rows="5"
+        placeholder="Message"></textarea>
+    </form>
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="primary" (click)="sendMessage()">Send</button>
+  </c-modal-footer>
+</c-modal>

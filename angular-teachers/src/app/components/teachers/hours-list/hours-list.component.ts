@@ -17,6 +17,7 @@ import { HourService } from 'src/app/services/hour.service';
 export class HoursListComponent {
   hours: Hour[] = [];
   user: User | null | undefined;
+  days:string[]=['','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
   constructor(
     public router: Router,

@@ -15,6 +15,8 @@ export class StudentSendMessageComponent implements OnInit {
 
   user: User | null | undefined;
   messages: Message[] = [];
+  messageSend: Message = new Message();
+  visible: boolean = false;
 
   constructor(public messageService: MessagesService,
     private accountService: AccountService,
@@ -45,6 +47,30 @@ export class StudentSendMessageComponent implements OnInit {
   updateRead(message: Message) {
     message.isRead = true;
     this.messageService.update(message).subscribe((res: any) => {
+      this.alertService.success(res.message, { keepAfterRouteChange: true });
+      this.cdRef.detectChanges();
+    })
+  }
+
+
+  toggleLiveDemo(message: Message) {
+    this.messageSend = new Message();
+    this.messageSend.fromUserId = this.user?.id ?? 0;
+    this.messageSend.toUserId = message.fromUserId ?? 0;
+    this.messageSend.isRead = false;
+
+    this.visible = !this.visible;
+  }
+
+  closeModalSend() {
+    this.visible = false;
+  }
+
+  sendMessage() {
+    this.messageSend.type = 1;
+    this.messageService.add(this.messageSend).subscribe((res: any) => {
+      this.visible = false;
+
       this.alertService.success(res.message, { keepAfterRouteChange: true });
       this.cdRef.detectChanges();
     })

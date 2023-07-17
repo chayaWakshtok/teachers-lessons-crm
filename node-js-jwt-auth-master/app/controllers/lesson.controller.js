@@ -52,7 +52,7 @@ exports.getAll = (req, res) => {
             {
                 model: db.teacher,
                 as: "teacher",
-                include: [{ model: db.user, as: "user" }]
+                include: [{ model: db.user, as: "user" }, { model: db.hour, as: "hours" }]
             },
             {
                 model: db.series,
