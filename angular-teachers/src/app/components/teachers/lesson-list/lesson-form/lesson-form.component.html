@@ -79,7 +79,8 @@
                           <div class="form-group">
                             <label for="topic">
                               Subject <span class="required">*</span>
-                              <a style="margin-left: 20px; color: #727cf5;" href="javascrit:void(1)">Add Subject</a>
+                              <a style="margin-left: 20px; color: #727cf5;" href="javascrit:void(1)"
+                                (click)="openSubject()">Add Subject</a>
                             </label>
                             <select [(ngModel)]="lesson.subjectId" class="form-select custom-select" name="subjectId"
                               id="subjectId" placeholder="subject" (change)="chooseSubject()">
@@ -91,7 +92,8 @@
                           <div class="form-group">
                             <label for="topic">
                               Specialty
-                              <a style="margin-left: 20px; color: #727cf5;" href="javascrit:void(1)">Add Specialty</a>
+                              <a style="margin-left: 20px; color: #727cf5;" href="javascrit:void(1)"
+                                (click)="openvisibleSpeciality()">Add Specialty</a>
                             </label>
                             <select [(ngModel)]="lesson.specialtyId" class="form-select custom-select"
                               name="specialtyId" id="specialtyId" placeholder="specialty">
@@ -126,3 +128,52 @@
     </div>
   </div>
 </div>
+
+
+<c-modal id="liveDemoModal" [visible]="visibleSubject">
+  <c-modal-header>
+    <h5 cModalTitle>Add Subject</h5>
+    <button (click)="clooseSubject()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form>
+      <input [(ngModel)]="newSubject.name" name="nameSubject" class="form-control" placeholder="Name" />
+    </form>
+  </c-modal-body>
+
+  <c-modal-footer>
+    <button cButton (click)="addSubject()" color="primary">Ok</button>
+  </c-modal-footer>
+</c-modal>
+
+
+<c-modal id="liveDemoModal33" [visible]="visibleSpeciality">
+  <c-modal-header>
+    <h5 cModalTitle>Add Speciality</h5>
+    <button (click)="cloosevisibleSpeciality()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form>
+      <div class="form-group">
+        <label for="topic">
+          Name <span class="required">*</span>
+        </label>
+        <input [(ngModel)]="newSpeciality.name" name="newSpeciality" class="form-control" placeholder="Name" required />
+      </div>
+      <div class="form-group">
+        <label for="topic">
+          Subject <span class="required">*</span>
+        </label>
+        <select [(ngModel)]="lesson.subjectId" class="form-select custom-select" name="subjectId" id="subjectId"
+          placeholder="subject" >
+          <option *ngFor="let item of subjectList" [value]="item.id">
+            {{item.name}}</option>
+        </select>
+      </div>
+    </form>
+  </c-modal-body>
+
+  <c-modal-footer>
+    <button cButton (click)="addSpeciality()" color="primary">Ok</button>
+  </c-modal-footer>
+</c-modal>

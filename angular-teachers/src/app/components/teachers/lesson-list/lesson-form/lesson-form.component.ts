@@ -9,6 +9,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { LessonService } from 'src/app/services/lesson.service';
 import { SeriesService } from 'src/app/services/series.service';
+import { SpecialityService } from 'src/app/services/speciality.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { TeachereService } from 'src/app/services/teachere.service';
 
@@ -26,6 +27,10 @@ export class LessonFormComponent implements OnInit {
   subjectList: Subject[] = [];
   loading: boolean = false;
   uploadedFiles: any;
+  visibleSubject: boolean = false;
+  visibleSpeciality: boolean = false;
+  newSubject: Subject = new Subject();
+  newSpeciality: Specialty = new Specialty();
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -33,7 +38,8 @@ export class LessonFormComponent implements OnInit {
     private teacherService: TeachereService,
     public subjectService: SubjectService,
     private alertService: AlertService,
-    public lessonService: LessonService) {
+    public lessonService: LessonService,
+    public specialityService:SpecialityService) {
   }
 
   ngOnInit(): void {
@@ -60,7 +66,6 @@ export class LessonFormComponent implements OnInit {
   chooseSubject() {
     this.specialtyList = this.subjectList.find(p => p.id == this.lesson.subjectId)?.specialties ?? [];
     if (this.lesson.specialtyId) {
-      debugger;
       if (!this.specialtyList.find(p => p.id == this.lesson.specialtyId))
         this.lesson.specialtyId = 0;
     }
@@ -98,7 +103,50 @@ export class LessonFormComponent implements OnInit {
     }
   }
 
-  fileChange(element:any) {
+  fileChange(element: any) {
     this.uploadedFiles = element.target.files;
+  }
+
+  openvisibleSpeciality() {
+    this.visibleSpeciality = true;
+    this.newSpeciality = new Specialty();
+  }
+
+  cloosevisibleSpeciality() {
+    this.visibleSpeciality = false;
+
+  }
+
+  addSubject() {
+    this.subjectService.add(this.newSubject).subscribe((res: any) => {
+      this.alertService.success(res.message, { keepAfterRouteChange: true });
+      this.subjectService.getAll().subscribe((res: any) => {
+        this.subjectList = res;
+        this.visibleSubject = false;
+
+      })
+    })
+  }
+
+  openSubject() {
+    this.visibleSubject = true;
+    this.newSubject = new Subject();
+  }
+
+  clooseSubject() {
+    this.visibleSubject = false;
+
+  }
+
+  addSpeciality() {
+
+    this.specialityService.add(this.newSpeciality).subscribe((res: any) => {
+      this.alertService.success(res.message, { keepAfterRouteChange: true });
+      this.subjectService.getAll().subscribe((res: any) => {
+        this.subjectList = res;
+        this.visibleSpeciality = false;
+
+      })
+    })
   }
 }

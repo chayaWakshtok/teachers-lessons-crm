@@ -18,4 +18,6 @@ export class StudentService {
     var minutes = num % 60;
     return [hours, minutes];
   }
+
+
 }
