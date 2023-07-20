@@ -39,7 +39,7 @@ export class LessonFormComponent implements OnInit {
     public subjectService: SubjectService,
     private alertService: AlertService,
     public lessonService: LessonService,
-    public specialityService:SpecialityService) {
+    public specialityService: SpecialityService) {
   }
 
   ngOnInit(): void {
@@ -125,6 +125,8 @@ export class LessonFormComponent implements OnInit {
         this.visibleSubject = false;
 
       })
+    }, err => {
+      this.alertService.error(err, { keepAfterRouteChange: true });
     })
   }
 
@@ -139,7 +141,6 @@ export class LessonFormComponent implements OnInit {
   }
 
   addSpeciality() {
-
     this.specialityService.add(this.newSpeciality).subscribe((res: any) => {
       this.alertService.success(res.message, { keepAfterRouteChange: true });
       this.subjectService.getAll().subscribe((res: any) => {
@@ -147,6 +148,8 @@ export class LessonFormComponent implements OnInit {
         this.visibleSpeciality = false;
 
       })
+    }, err => {
+      this.alertService.error(err, { keepAfterRouteChange: true });
     })
   }
 }

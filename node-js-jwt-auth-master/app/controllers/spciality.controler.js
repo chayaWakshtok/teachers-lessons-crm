@@ -23,13 +23,27 @@ exports.getAll = (req, res) => {
 
 exports.create = (req, res) => {
 
-    var data = req.body;
+    Specialty.findOne({
+        where: {
+            name: req.body.name
+        }
+    }).then(result => {
+        if (result) {
+            res.status(500).send({
+                message: "Failed! Specialty is already exits!"
+            });
+            return;
+        }
+        else {
+            var data = req.body;
 
-    Specialty.create(data)
-        .then(user => {
-            res.send({ message: "Specialty add successfully!" });
-        })
-        .catch(err => {
-            res.status(500).send({ message: err.message });
-        });
+            Specialty.create(data)
+                .then(user => {
+                    res.send({ message: "Specialty add successfully!" });
+                })
+                .catch(err => {
+                    res.status(500).send({ message: err.message });
+                });
+        }
+    });
 };

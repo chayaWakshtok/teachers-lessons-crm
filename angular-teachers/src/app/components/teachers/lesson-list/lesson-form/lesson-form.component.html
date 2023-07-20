@@ -164,7 +164,7 @@
         <label for="topic">
           Subject <span class="required">*</span>
         </label>
-        <select [(ngModel)]="lesson.subjectId" class="form-select custom-select" name="subjectId" id="subjectId"
+        <select [(ngModel)]="newSpeciality.subjectId" class="form-select custom-select" name="subjectId" id="subjectId"
           placeholder="subject" >
           <option *ngFor="let item of subjectList" [value]="item.id">
             {{item.name}}</option>
