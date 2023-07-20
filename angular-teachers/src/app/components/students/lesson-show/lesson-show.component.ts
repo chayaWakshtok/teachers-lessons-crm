@@ -35,8 +35,8 @@ export class LessonShowComponent {
   chooseTime: any = null;
   user: User | null | undefined;
   hoursTeacher: Hour[] = [];
-  reviewByCount: number[] = [0, 0, 0, 0, 0];
-  reviews: Remark[] = [];
+  reviewByCount: number[] = [0, 0, 0, 0, 0]; //keep the numers of the people that brought theese stars.
+  reviews: Remark[] = []; //array of all the reamrks till now of catch lessons.
 
   constructor(public lessonService: LessonService,
     private route: ActivatedRoute,
@@ -64,9 +64,9 @@ export class LessonShowComponent {
       //flag to half hour
       var d1 = 0;
 
-      this.catchLessonsTeacher.forEach(x => {
-        var date1 = new Date(x.dateFrom).setHours(0, 0, 0, 0);
-        var date2 = new Date(this.catchLesson.dateFrom).setHours(0, 0, 0, 0);
+      this.catchLessonsTeacher.forEach(x => {//u pass on all the catchlessons of this teacher. 
+        var date1 = new Date(x.dateFrom).setHours(0, 0, 0, 0);//the date of the catch lesson of the teacher.
+        var date2 = new Date(this.catchLesson.dateFrom).setHours(0, 0, 0, 0);//the date selected.
         if (date1 == date2) {
           if (hour >= new Date(x.dateFrom).getHours() - hours - (minutes > 0 ? 1 : 0) && hour < new Date(x.dateTo).getHours()) {
             d = 1;
@@ -109,28 +109,28 @@ export class LessonShowComponent {
   }
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {//show all the available hours of the teacher - has no vaction with calc of his hours.
 
     this.accountService.user.subscribe(x => {
       this.user = x;
     });
 
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.id = Number(this.route.snapshot.paramMap.get('id'));//id lesson.
     this.lessonService.findById(this.id).subscribe((res: any) => {
       this.lesson = res;
       console.log(this.lesson);
-      this.lesson.catchLessons.forEach(x => {
-        x.remarks.forEach(y => {
-          this.reviews.push(y);
-          this.reviewByCount[y.stars - 1]++;
+      this.lesson.catchLessons.forEach(x => { //we go over the the catch lessons of this lesson in the system.
+        x.remarks.forEach(y => { //remark.
+          this.reviews.push(y); //push to the array.
+          this.reviewByCount[y.stars - 1]++; //keep the numers of the people that brought theese stars.
         });
       });
       this.catchLessonService.getAllByTeacher(this.lesson.teacherId).subscribe((res: any) => {
-        this.catchLessonsTeacher = res;
+        this.catchLessonsTeacher = res;//we got all the teacer of this lesson that were
         console.log(this.catchLessonsTeacher);
       });
 
-
+                // teacher holidays                                          //all his hours                                                           
       forkJoin([this.holidayService.getAllByTeacher(this.lesson.teacherId), this.hourService.getAllByTeacher(this.lesson.teacherId)]).subscribe(p => {
         this.holidays = p[0];
         this.hoursTeacher = p[1];
@@ -141,41 +141,41 @@ export class LessonShowComponent {
         dateTill.setDate(date.getDate() + 30);
 
         while (date <= dateTill) {
-          date.setDate(date.getDate() + 1);
+          date.setDate(date.getDate() + 1);//here u can see that u can set only for tommorrow- for next 24 hours.
 
           var result = [];
           var findDay = true;
 
           //check if date is holiday
           this.holidays.filter(x => x.allDay == true && x.isActive == true).forEach(element => {
-            var dateE = new Date(element.date).setHours(0, 0, 0, 0);
-            var dateToE = new Date(element.toDate).setHours(0, 0, 0, 0);
+            var dateE = new Date(element.date).setHours(0, 0, 0, 0); //start hooildat day.
+            var dateToE = new Date(element.toDate).setHours(0, 0, 0, 0);//end holiday day.
             if (dateE <= date.setHours(0, 0, 0, 0) && dateToE >= date.setHours(0, 0, 0, 0)) {
-              result.push(element);
+              result.push(element);//collect all the holidays of the next month/
             }
           });
 
           //find day that teacher work
-          var find = this.hoursTeacher.filter(p => p.isActive == true && p.day == date.getDay() + 1);
+          var find = this.hoursTeacher.filter(p => p.isActive == true && p.day == date.getDay() + 1);//filter to get all the 
           if (find.length == 0)
             findDay = false;
 
 
-          if (result.length == 0 && findDay)
+          if (result.length == 0 && findDay)//if the teacher works and the has no vaction so can add this date to the list append.
             this.dateSelect.push(new Date(date));
         }
       });
     });
   }
 
-  chooseDate() {
+  chooseDate() {//
 
     this.catchLesson.dateFrom = new Date(this.catchLesson.dateFrom);
     this.catchLesson.lessonId = this.lesson.id;
     this.catchLesson.studentId = this.user?.student?.id ?? 0;
     this.catchLesson.teacherId = this.lesson.teacherId;
 
-    this.fillHours();
+    this.fillHours();//bring the right hours to the selected date.
     this.chooseTime = null;
   }
 
@@ -197,7 +197,7 @@ export class LessonShowComponent {
     });
   }
 
-  time_convert(num: number) {
+  time_convert(num: number) {//display the duration of the lesson hour:minutes.
     var hours = Math.floor(num / 60);
     var minutes = num % 60;
     return hours + ":" + minutes;
