@@ -1,5 +1,5 @@
 import { Time } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { el } from 'date-fns/locale';
 import { catchLesson } from 'src/app/models/catch-lesson';
@@ -45,7 +45,8 @@ export class LessonShowComponent {
     public accountService: AccountService,
     private alertService: AlertService,
     public hourService: HourService,
-    public router: Router
+    public router: Router,
+    private cdRef: ChangeDetectorRef,
   ) {
 
   }
@@ -106,6 +107,7 @@ export class LessonShowComponent {
           this.hoursChoose.push(moment({ hour, minute: 30 }).format('H:mm'));
       }
     }
+    this.cdRef.detectChanges();
   }
 
 
@@ -130,7 +132,7 @@ export class LessonShowComponent {
         console.log(this.catchLessonsTeacher);
       });
 
-                // teacher holidays                                          //all his hours                                                           
+      // teacher holidays                                          //all his hours                                                           
       forkJoin([this.holidayService.getAllByTeacher(this.lesson.teacherId), this.hourService.getAllByTeacher(this.lesson.teacherId)]).subscribe(p => {
         this.holidays = p[0];
         this.hoursTeacher = p[1];
