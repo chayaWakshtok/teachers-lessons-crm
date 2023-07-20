@@ -55,7 +55,7 @@ export class LessonShowComponent {
     //hour and minutes
     var hours = Math.floor(this.lesson.durationHour / 60);
     var minutes = this.lesson.durationHour % 60;
-    this.hoursChoose = [];
+    this.hoursChoose = [];//here the hours that the student will choose.
 
     for (let hour = 0; hour <= 23; hour++) {
 
