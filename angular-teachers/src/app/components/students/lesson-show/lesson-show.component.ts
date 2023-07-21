@@ -1,7 +1,7 @@
 import { Time } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { el } from 'date-fns/locale';
+import { ca, el } from 'date-fns/locale';
 import { catchLesson } from 'src/app/models/catch-lesson';
 import { Holiday } from 'src/app/models/holiday';
 import { Lesson } from 'src/app/models/lesson';
@@ -52,60 +52,111 @@ export class LessonShowComponent {
 
   fillHours() {
 
-    //hour and minutes
-    var hours = Math.floor(this.lesson.durationHour / 60);
-    var minutes = this.lesson.durationHour % 60;
-    this.hoursChoose = [];//here the hours that the student will choose.
+    this.hoursChoose = [];
+    var dateFrom = new Date(this.catchLesson.dateFrom);
+    var hoursDay = new Date(new Date(this.catchLesson.dateFrom).setHours(0, 0, 0, 0));
 
-    for (let hour = 0; hour <= 23; hour++) {
+    this.hoursTeacher.filter(p => p.isActive == true && p.day == dateFrom.getDay() + 1).forEach(hourTeacher => {
+      var myMomentFrom = moment(hourTeacher.fromHour, "HH:mm:ss");
+      var myMomentTo = moment(hourTeacher.tillHour, "HH:mm:ss");
 
-      //flag to hour
-      var d = 0;
-      //flag to half hour
-      var d1 = 0;
+      for (let minutsDay = myMomentFrom.hours() * 60 + myMomentFrom.minutes(); minutsDay <= myMomentTo.hours() * 60 + myMomentTo.minutes();) {
+        hoursDay.setMinutes(minutsDay);
+        var d1 = false;
+        var d2 = false;
+        this.catchLessonsTeacher.forEach(catchL => {
 
-      this.catchLessonsTeacher.forEach(x => {
-        var date1 = new Date(x.dateFrom).setHours(0, 0, 0, 0);
-        var date2 = new Date(this.catchLesson.dateFrom).setHours(0, 0, 0, 0);
-        if (date1 == date2) {
-          if (hour >= new Date(x.dateFrom).getHours() - hours - (minutes > 0 ? 1 : 0) && hour < new Date(x.dateTo).getHours()) {
-            d = 1;
-            if (30 <= new Date(x.dateTo).getMinutes()) {
-              d1 = 1;
-            }
-          }
-        }
-      });
 
-      this.holidays.filter(p => p.allDay == false).forEach(x => {
-        var date1 = new Date(x.date).setHours(0, 0, 0, 0);
-        var date2 = new Date(this.catchLesson.dateFrom).setHours(0, 0, 0, 0);
-        if (date1 == date2) {
-          if (hour >= new Date(x.date).getHours() - hours - (minutes > 0 ? 1 : 0) && hour < new Date(x.toDate).getHours()) {
-            d = 1;
-            if (30 <= x.toDate.getMinutes()) {
-              d1 = 1;
-            }
+          if (catchL.dateFrom <= hoursDay && catchL.dateTo > hoursDay) {
+            d1 = true;
+            var efresh = catchL.dateTo.getMinutes() - minutsDay;
+            minutsDay += Number(efresh);
           }
 
-        }
-      });
-      this.hoursTeacher.filter(p => p.isActive == true && p.day == this.catchLesson.dateFrom.getDay() + 1).forEach(x => {
-        var timeArr = x.fromHour.split(":");
-        var timeArr2 = x.tillHour.split(":");
-        if (hour < Number(timeArr[0]) || hour > Number(timeArr2[0]) - hours) {
-          d = 1;
-          d1 = 1;
-        }
-      });
+          if (catchL.dateFrom > hoursDay && catchL.dateFrom.getHours() * 60 + catchL.dateFrom.getMinutes() - minutsDay < Number(this.lesson.durationHour)) {
+            d1 = true;
+            minutsDay = catchL.dateTo.getHours() * 60 + catchL.dateTo.getMinutes();
+          }
+        })
 
+        this.holidays.filter(p => p.allDay == false).forEach(x => {
+          var date2 = new Date(this.catchLesson.dateFrom);
+          if (x.date.getDate() == date2.getDate()) {
+            if (minutsDay + this.lesson.durationHour >= x.date.getHours() * 60 + x.date.getMinutes() && minutsDay < x.toDate.getHours() * 60 + x.toDate.getMinutes()) {
+              d1 = true;
+              minutsDay = x.toDate.getHours() * 60 + x.toDate.getMinutes();
+            }
 
-      if (d != 1) {
-        this.hoursChoose.push(moment({ hour }).format('H:mm'));
-        if (d1 != 1)
-          this.hoursChoose.push(moment({ hour, minute: 30 }).format('H:mm'));
+          }
+        });
+
+        if (d1 == false) {
+          var pushItem = Math.floor(minutsDay / 60) + ':' + (minutsDay % 60 > 9 ? minutsDay % 60 : (minutsDay % 60) + '0');
+          if (this.hoursChoose.indexOf(pushItem) == -1)
+            this.hoursChoose.push(pushItem);
+          minutsDay += Number(this.lesson.durationHour)
+        }
+
       }
-    }
+    });
+
+
+
+
+    //hour and minutes
+    // var hours = Math.floor(this.lesson.durationHour / 60);
+    // var minutes = this.lesson.durationHour % 60;
+    // this.hoursChoose = [];//here the hours that the student will choose.
+
+    // for (let hour = 0; hour <= 23; hour++) {
+
+    //   //flag to hour
+    //   var d = 0;
+    //   //flag to half hour
+    //   var d1 = 0;
+
+    //   this.catchLessonsTeacher.forEach(x => {
+    //     var date1 = new Date(x.dateFrom).setHours(0, 0, 0, 0);
+    //     var date2 = new Date(this.catchLesson.dateFrom).setHours(0, 0, 0, 0);
+    //     if (date1 == date2) {
+    //       if (hour >= new Date(x.dateFrom).getHours() - hours - (minutes > 0 ? 1 : 0) && hour < new Date(x.dateTo).getHours()) {
+    //         d = 1;
+    //         if (30 <= new Date(x.dateTo).getMinutes()) {
+    //           d1 = 1;
+    //         }
+    //       }
+    //     }
+    //   });
+
+    //   this.holidays.filter(p => p.allDay == false).forEach(x => {
+    //     var date1 = new Date(x.date).setHours(0, 0, 0, 0);
+    //     var date2 = new Date(this.catchLesson.dateFrom).setHours(0, 0, 0, 0);
+    //     if (date1 == date2) {
+    //       if (hour >= new Date(x.date).getHours() - hours - (minutes > 0 ? 1 : 0) && hour < new Date(x.toDate).getHours()) {
+    //         d = 1;
+    //         if (30 <= x.toDate.getMinutes()) {
+    //           d1 = 1;
+    //         }
+    //       }
+
+    //     }
+    //   });
+    //   this.hoursTeacher.filter(p => p.isActive == true && p.day == this.catchLesson.dateFrom.getDay() + 1).forEach(x => {
+    //     var timeArr = x.fromHour.split(":");
+    //     var timeArr2 = x.tillHour.split(":");
+    //     if (hour < Number(timeArr[0]) || hour > Number(timeArr2[0]) - hours) {
+    //       d = 1;
+    //       d1 = 1;
+    //     }
+    //   });
+
+
+    //   if (d != 1) {
+    //     this.hoursChoose.push(moment({ hour }).format('H:mm'));
+    //     if (d1 != 1)
+    //       this.hoursChoose.push(moment({ hour, minute: 30 }).format('H:mm'));
+    //   }
+    // }
   }
 
 
@@ -127,12 +178,26 @@ export class LessonShowComponent {
       });
       this.catchLessonService.getAllByTeacher(this.lesson.teacherId).subscribe((res: any) => {
         this.catchLessonsTeacher = res;
+        this.catchLessonsTeacher.forEach(cat => {
+          var hours = new Date(cat.dateFrom).getHours();
+          cat.dateFrom = new Date(new Date(cat.dateFrom).setHours(hours - 3));
+
+          var hours = new Date(cat.dateTo).getHours();
+          cat.dateTo = new Date(new Date(cat.dateTo).setHours(hours - 3));
+        })
         console.log(this.catchLessonsTeacher);
       });
 
 
       forkJoin([this.holidayService.getAllByTeacher(this.lesson.teacherId), this.hourService.getAllByTeacher(this.lesson.teacherId)]).subscribe(p => {
         this.holidays = p[0];
+        this.holidays.forEach(h => {
+          var hours = new Date(h.date).getHours();
+          h.date = new Date(new Date(h.date).setHours(hours - 3));
+
+          var hours = new Date(h.toDate).getHours();
+          h.toDate = new Date(new Date(h.toDate).setHours(hours - 3));
+        })
         this.hoursTeacher = p[1];
 
         var date = new Date();

@@ -98,7 +98,7 @@
           <div class="col-md-12">
             <div class="average-rating ms-auto me-auto float-md-start mb-sm-4">
               <div class="num">
-                {{lesson.stars}} </div>
+                {{lesson.stars.toFixed(2)}} </div>
               <div class="rating">
                 <i class="fas fa-star" style="color: #abb0bb;" [ngClass]="{'filled': lesson.stars>=1}"></i>
                 <i class="fas fa-star" style="color: #abb0bb;" [ngClass]="{'filled': lesson.stars>=2}"></i>
