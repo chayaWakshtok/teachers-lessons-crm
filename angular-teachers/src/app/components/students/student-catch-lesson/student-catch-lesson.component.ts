@@ -64,7 +64,7 @@ export class StudentCatchLessonComponent implements OnInit {
   sendMessage() {
     this.messageSend.type = 1;
     this.messageService.add(this.messageSend).subscribe((res: any) => {
-      this.visible = false;
+      this.visible = false; //for message box visibility.
 
       this.alertService.success(res.message, { keepAfterRouteChange: true });
       this.cdRef.detectChanges();
@@ -73,7 +73,7 @@ export class StudentCatchLessonComponent implements OnInit {
 
   sendRemark() {
     this.remarkService.add(this.remark).subscribe((res: any) => {
-      this.visibleRemark = false;
+      this.visibleRemark = false; //for remark box visibility.
 
       this.alertService.success(res.message, { keepAfterRouteChange: true });
       this.cdRef.detectChanges();

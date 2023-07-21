@@ -14,7 +14,6 @@ module.exports = function(app) {
   app.post(
     "/api/auth/signup",
     [
-      upload.single("file"),
       verifySignUp.checkDuplicateUsernameOrEmail,
       verifySignUp.checkRolesExisted
     ],
