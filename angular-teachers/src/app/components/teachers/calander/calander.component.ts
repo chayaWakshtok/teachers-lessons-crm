@@ -152,7 +152,7 @@ export class CalanderComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    debugger;
+    //debugger;
     this.modalData = { event, action };
     // this.modal.open(this.modalContent, { size: 'lg' });
   }

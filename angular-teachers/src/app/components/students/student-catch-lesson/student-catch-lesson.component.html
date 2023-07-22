@@ -45,7 +45,7 @@
                   <tr *ngFor="let item of catchLessons">
                     <td>{{item.id}}</td>
                     <td>{{item.lesson.title}}</td>
-                    <td>{{item.dateFrom |date:'dd/MM/yyyy hh:mm'}}</td>
+                    <td>{{item.dateFrom |date:'dd/MM/yyyy HH:mm '}}</td>
                     <td>{{item.lesson.durationHour}}</td>
                     <td>{{item.lesson.price}}</td>
                     <td>{{item.teacher.user?.firstName}} {{item.teacher.user?.lastName}}</td>

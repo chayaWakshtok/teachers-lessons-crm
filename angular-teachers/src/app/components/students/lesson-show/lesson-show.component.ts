@@ -51,7 +51,7 @@ export class LessonShowComponent {
   }
 
   fillHours() {
-
+    debugger;
     this.hoursChoose = [];
     var dateFrom = new Date(this.catchLesson.dateFrom);
     var hoursDay = new Date(new Date(this.catchLesson.dateFrom).setHours(0, 0, 0, 0));
@@ -61,15 +61,16 @@ export class LessonShowComponent {
       var myMomentTo = moment(hourTeacher.tillHour, "HH:mm:ss");
 
       for (let minutsDay = myMomentFrom.hours() * 60 + myMomentFrom.minutes(); minutsDay <= myMomentTo.hours() * 60 + myMomentTo.minutes();) {
-        hoursDay.setMinutes(minutsDay);
+        hoursDay.setHours(0, 0, 0, 0);
+        hoursDay.setMinutes(minutsDay)
         var d1 = false;
         var d2 = false;
-        this.catchLessonsTeacher.forEach(catchL => {
+        this.catchLessonsTeacher.filter(p=>p.dateFrom.getDate()==dateFrom.getDate()).forEach(catchL => {
 
 
           if (catchL.dateFrom <= hoursDay && catchL.dateTo > hoursDay) {
             d1 = true;
-            var efresh = catchL.dateTo.getMinutes() - minutsDay;
+            var efresh =catchL.dateTo.getHours()*60+ catchL.dateTo.getMinutes() - minutsDay;
             minutsDay += Number(efresh);
           }
 
@@ -82,7 +83,7 @@ export class LessonShowComponent {
         this.holidays.filter(p => p.allDay == false).forEach(x => {
           var date2 = new Date(this.catchLesson.dateFrom);
           if (x.date.getDate() == date2.getDate()) {
-            if (minutsDay + this.lesson.durationHour >= x.date.getHours() * 60 + x.date.getMinutes() && minutsDay < x.toDate.getHours() * 60 + x.toDate.getMinutes()) {
+            if (minutsDay +Number(this.lesson.durationHour)  > x.date.getHours() * 60 + x.date.getMinutes() && minutsDay < x.toDate.getHours() * 60 + x.toDate.getMinutes()) {
               d1 = true;
               minutsDay = x.toDate.getHours() * 60 + x.toDate.getMinutes();
             }
@@ -169,6 +170,7 @@ export class LessonShowComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.lessonService.findById(this.id).subscribe((res: any) => {
       this.lesson = res;
+      this.lesson.durationHour=Number(this.lesson.durationHour);
       console.log(this.lesson);
       this.lesson.catchLessons.forEach(x => {
         x.remarks.forEach(y => {
@@ -179,11 +181,9 @@ export class LessonShowComponent {
       this.catchLessonService.getAllByTeacher(this.lesson.teacherId).subscribe((res: any) => {
         this.catchLessonsTeacher = res;
         this.catchLessonsTeacher.forEach(cat => {
-          var hours = new Date(cat.dateFrom).getHours();
-          cat.dateFrom = new Date(new Date(cat.dateFrom).setHours(hours - 3));
+          cat.dateFrom = new Date(cat.dateFrom);
 
-          var hours = new Date(cat.dateTo).getHours();
-          cat.dateTo = new Date(new Date(cat.dateTo).setHours(hours - 3));
+          cat.dateTo = new Date(cat.dateTo);
         })
         console.log(this.catchLessonsTeacher);
       });
@@ -192,11 +192,8 @@ export class LessonShowComponent {
       forkJoin([this.holidayService.getAllByTeacher(this.lesson.teacherId), this.hourService.getAllByTeacher(this.lesson.teacherId)]).subscribe(p => {
         this.holidays = p[0];
         this.holidays.forEach(h => {
-          var hours = new Date(h.date).getHours();
-          h.date = new Date(new Date(h.date).setHours(hours - 3));
-
-          var hours = new Date(h.toDate).getHours();
-          h.toDate = new Date(new Date(h.toDate).setHours(hours - 3));
+          h.date = new Date(h.date);
+          h.toDate = new Date(h.toDate);
         })
         this.hoursTeacher = p[1];
 
