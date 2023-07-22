@@ -51,7 +51,7 @@ export class LessonShowComponent {
   }
 
   fillHours() {
-    debugger;
+    //debugger;
     this.hoursChoose = [];
     var dateFrom = new Date(this.catchLesson.dateFrom);
     var hoursDay = new Date(new Date(this.catchLesson.dateFrom).setHours(0, 0, 0, 0));
@@ -92,7 +92,7 @@ export class LessonShowComponent {
         });
 
         if (d1 == false) {
-          var pushItem = Math.floor(minutsDay / 60) + ':' + (minutsDay % 60 > 9 ? minutsDay % 60 : (minutsDay % 60) + '0');
+          var pushItem = Math.floor(minutsDay / 60) + ':' + (minutsDay % 60 > 9 ? minutsDay % 60 :'0' + (minutsDay % 60));
           if (this.hoursChoose.indexOf(pushItem) == -1)
             this.hoursChoose.push(pushItem);
           minutsDay += Number(this.lesson.durationHour)
